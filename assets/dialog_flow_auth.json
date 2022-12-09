@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "krishakfarma-xswu",
+  "private_key_id": "f152ae0b36937d1f3b8c8583ec5e151d6469a8f9",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDTk6Hhy/KaqpES\nFqIieO+Mmwds9yDZBO4kYrhJrPlrY9lt1aAKHQNKRcHDMQFnQFBNM00npDhJNc3H\ntEa6yPXFj22ZJ3aiE7/0P2QKLZ6o+kdzCbGtlX6/wJtMmop6kz9tvmkiBX9GDdnb\nAvy9zRaWiTm2Y9XDS7eBA35ODxPJ0IIQN3bG1Gy/a054kSIElKpCKwC/Pl8ujxTu\nErzeG6t0VEXM07cN7MeQPab06+utrVWADeG0dvkeygQhB117dD8KKvYQ1DLy2Xut\nVmRVIniWFWZcllz7SsGuZEjfY/8ahkcB/xt7Z1bwwOwzXPY4oP17u5NnTNQ+lYAy\nomidbwwnAgMBAAECggEACOJVAYlR6+FH2F9MU8k802xURzGOigsiDgB5/4uWKSzw\nqm/pcyZ27TP5QZjgF7W3vLFWRvKNpuYg+KB4kqUXzA6ZPT1oefOW84q3FZK6OLTS\nfwfQ4HQu3Dgz7TQIc49iS7/oMNSgdjcXrXgcvii+wl4LWj338f+1OjAedujWkMdI\n7tL2TyHeoiyERaA4tIl/cEO+I7AsdnHAgw00ehJ2uoKIqsdPFbWEl8XNpiVID0S8\nAGF1JQC2/4bI2i2+bVugYFA6MP1xpqKil6vDdSqbxteBxpkonADqZIganrXN/TvG\nODm4F1iVCr82UC5yLHArqplhkfGiQWf2Qt+lflB0pQKBgQD0gCnnR56I0gmTFFsu\ny4RFv1jo3DzobhEz/92OKB/1GJSPTd2UtouJvRCUYStYIgx2XjhX+mG+lCvSC8Ry\n3W+45TdZmXDyCnO2mFRjJqaSeCybGLsh3NH9uiH59pB7SklLxxAxmrlydLBIc4mg\nzwSU+j6mTVE7RDb6AsrLCgxPTQKBgQDdhw7JD/PfXWsa1TOVlg2dBzfKJpthikii\nXqgiAWyQGVc1eeTMIcJQivD07M3Gvh1Q7iSeGni62WnCLOi8ZGRY+ehpDIZUgErw\nOi0SwsWGhJpcknqyTIlEyqhmcaNiCoz6tZNywECuLEfC+pzjq5v4d6QvsAjOsnoE\nPnS9lv/3QwKBgQD0WQGHufOeGQqoird11L6kVc6tKS1VvGpE5XiuETue3qnZbZ/8\nd1KMnP5sy49dzOlXgmIcyoXUyI/iow/5G4QD7E+co9RUkE2ENkhfrsjZqHArsFOU\nS/Mw90vtW5SZImyN5qswZ8jdsfBa99ybcUjK+iySVsLP0CSBRzkUIT6cIQKBgGMa\nk7PBbkGkIlFLxhsKmSaB3ySRpvu5CIuTOzaTWoUQwSIMWR41kB/GOMvp0Jkz3huh\nnkIY55/3uceDnc8CPp5Llvy//Kx7BIt6C0YUWpe2ZPQ7F6cCdHqRC0thVU18GNvk\nNYWlmooRBz2kLmHwGQPMSmiHITmPQOT7J/DVR8fPAoGBALFVAIUT96gfU7nN2cx5\n8B026iChPwd8UzCnmwy2S5Eprz2gAFs4p4b0gZWiMUYansgqBaCkFeFwtANLEFRN\nx88BS5VMj/yXpFpqhaug68ujCvArv7YJly2a5S0gZ5vH/82lsNt9IKPNRdu8RVuk\nik1B7CE2ExqDKqhshz2C9vK4\n-----END PRIVATE KEY-----\n",
+  "client_email": "krishakfarmachat@krishakfarma-xswu.iam.gserviceaccount.com",
+  "client_id": "111555465538230289498",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/krishakfarmachat%40krishakfarma-xswu.iam.gserviceaccount.com"
+}

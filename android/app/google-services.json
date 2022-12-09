@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "472583137649",
+    "project_id": "krishakfarma-ed4bd",
+    "storage_bucket": "krishakfarma-ed4bd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:472583137649:android:ee6b316481d6eb35152ed0",
+        "android_client_info": {
+          "package_name": "com.example.krishak_farma"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "472583137649-0a6m56ek0od43m74ledg9j1648mvsrho.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoYGt_Mz8fRLLylK5EpS87LzvFSEfwHNM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "472583137649-0a6m56ek0od43m74ledg9j1648mvsrho.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
