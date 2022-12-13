@@ -459,6 +459,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:krishak_farma/screens/home/components/LocationPage.dart';
 
 import '../../../components/custom_surfix_icon.dart';
 import '../../../models/add_date.dart';
@@ -540,17 +541,17 @@ class _AddProductState extends State<AddProduct> {
       child: Column(
         children: [
           SizedBox(height: 30),
-          explain3(),// for name
+          Name(),// for name
           SizedBox(height: 30),
-          name(),// for select the product
+          Product(),// for select the product
           SizedBox(height: 30),
-          explain2(),// for quantity of product
+          Quantity(),// for quantity of product
           SizedBox(height: 30),
-          explain4(),// for location of farmer
+          Location(),// for location of farmer
           SizedBox(height: 30),
-          // How(),
-          // SizedBox(height: 30),
           date_time(),
+          SizedBox(height: 30),
+          TakeMobileNo(),// Take mobile No input
           Spacer(),
           save(),
           SizedBox(height: 25),
@@ -720,7 +721,7 @@ class _AddProductState extends State<AddProduct> {
   }
 
   // for name of farmer
-  Padding explain3() {
+  Padding Name() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: TextField(
@@ -746,7 +747,7 @@ class _AddProductState extends State<AddProduct> {
 
   // for location
 
-  Padding explain4() {
+  Padding Location() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: TextField(
@@ -762,7 +763,14 @@ class _AddProductState extends State<AddProduct> {
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(width: 2, color: Colors.deepOrangeAccent)),
-          suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Discover.svg"),
+          suffixIcon: IconButton(
+            onPressed:() {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) =>LocationPage())
+              );
+            },
+            icon: CustomSurffixIcon(svgIcon: "assets/icons/Discover.svg"),
+          )
         ),
       ),
     );
@@ -770,15 +778,16 @@ class _AddProductState extends State<AddProduct> {
 
   // for quantity of product
 
-  Padding explain2() {
+  Padding Quantity() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: TextField(
-        //focusNode: ex,
+          keyboardType:TextInputType.number,
+          //focusNode: ex,
         //controller: expalin_C,// here for storing the name of farmer modify code later
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-          labelText: 'Enter quantity of product',
+          labelText: 'Enter quantity of product in Kg',
           labelStyle: TextStyle(fontSize: 17, color: Colors.grey.shade500),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
@@ -792,8 +801,29 @@ class _AddProductState extends State<AddProduct> {
     );
   }
 
-
-  Padding name() {
+  Padding TakeMobileNo(){
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: TextField(
+        keyboardType:TextInputType.number,
+        //focusNode: ex,
+        //controller: expalin_C,// here for storing the name of farmer modify code later
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          labelText: 'Enter Mobile No',
+          labelStyle: TextStyle(fontSize: 17, color: Colors.grey.shade500),
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(width: 2, color: Color(0xffC5C5C5))),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(width: 2, color: Colors.deepOrangeAccent)),
+          suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/receipt.svg"),
+        ),
+      ),
+    );
+  }
+  Padding Product() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Container(
