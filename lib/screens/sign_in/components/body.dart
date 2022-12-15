@@ -2,10 +2,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:krishak_farma/screens/sign_in/components/sign_form.dart';
+import 'package:krishak_farma/components/no_account_text.dart';
+import 'package:krishak_farma/components/social_card.dart';
+import 'package:krishak_farma/size_config.dart';
 
-import '../../../components/no_account_text.dart';
-import '../../../components/social_card.dart';
-import '../../../size_config.dart';
+
 
 class Body extends StatelessWidget {
   @override
