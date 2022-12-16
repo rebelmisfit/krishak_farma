@@ -1060,8 +1060,8 @@ class _AddProductState extends State<AddProduct> {
           SizedBox(height: 30),
           Quantity(),// for quantity of product
           SizedBox(height: 30),
-          //Location(),// for location of farmer
-          finalloc(),
+          Location(),// for location of farmer
+          //finalloc(),
           SizedBox(height: 30),
           date_time(),
           SizedBox(height: 30),
@@ -1378,13 +1378,21 @@ class _AddProductState extends State<AddProduct> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: TextField(
-
+        keyboardType: TextInputType.none,
         //focusNode: ex,
-        //controller: expalin_C,// here for storing the name of farmer modify code later
+        //autofocus: false,
+        //initialValue: 'your initial text',
+        controller: expalin_C,// here for storing the name of farmer modify code later
+        showCursor: false,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-          labelText: 'Select location ',
-          labelStyle: TextStyle(fontSize: 17, color: Colors.grey.shade500),
+          //labelText: "${widget.txt}",
+
+          hintText: "select location press icon ",
+          labelText: "${widget.txt}",
+          // hintText: "${widget.txt}",
+          // labelText: "select location press icon at right side",
+          labelStyle: TextStyle(fontSize: 15, color: Colors.black),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(width: 2, color: Color(0xffC5C5C5))),
@@ -1412,10 +1420,13 @@ class _AddProductState extends State<AddProduct> {
               onPressed:() {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => LocationPage()),
+
+
                 );
               }
           ),
         ),
+
       ),
     );
   }

@@ -13,6 +13,7 @@ class LocationPage extends StatefulWidget {
 class _LocationPageState extends State<LocationPage> {
   String? _currentAddress;
   Position? _currentPosition;
+  //late String tet="press icon to select location";
 
   Future<bool> _handleLocationPermission() async {
     bool serviceEnabled;
@@ -64,6 +65,7 @@ class _LocationPageState extends State<LocationPage> {
       setState(() {
         _currentAddress =
         ' ${place.name},${place.subLocality},${place.locality},${place.subAdministrativeArea} ${place.country}, ${place.postalCode}';
+          //tet=_currentAddress!;
       });
     }).catchError((e) {
       debugPrint(e);
@@ -97,7 +99,7 @@ class _LocationPageState extends State<LocationPage> {
                 ),
                 onPressed: (){
                   Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) =>AddProduct(txt: _currentAddress,))
+                    MaterialPageRoute(builder: (context) =>AddProduct(txt:_currentAddress,))
                   );
                 },
                 child: const Text("Go back to Add page"),
