@@ -63,7 +63,7 @@ class _LocationPageState extends State<LocationPage> {
       Placemark place = placemarks[0];
       setState(() {
         _currentAddress =
-        ' ${place.name},${place.subLocality},${place.locality},${place.subAdministrativeArea}, ${place.country}, ${place.postalCode}';
+        ' ${place.name},${place.subLocality},${place.locality},${place.subAdministrativeArea} ${place.country}, ${place.postalCode}';
       });
     }).catchError((e) {
       debugPrint(e);
@@ -97,7 +97,7 @@ class _LocationPageState extends State<LocationPage> {
                 ),
                 onPressed: (){
                   Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) =>AddProduct())
+                    MaterialPageRoute(builder: (context) =>AddProduct(txt: _currentAddress,))
                   );
                 },
                 child: const Text("Go back to Add page"),
