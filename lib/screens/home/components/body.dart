@@ -7,6 +7,7 @@ import 'categories.dart';
 import 'discount_banner.dart';
 import 'ecommerceimages.dart';
 import 'home_header.dart';
+import 'package:krishak_farma/screens/home/components/flash_deal.dart';
 
 class Body extends StatelessWidget {
   @override

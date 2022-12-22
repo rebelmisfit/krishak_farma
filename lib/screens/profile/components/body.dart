@@ -54,11 +54,11 @@ class _BodyState extends State<Body> {
             icon: "assets/icons/Bell.svg",
             press: () {},
           ),
-          ProfileMenu(
-            text: "Settings",
-            icon: "assets/icons/Settings.svg",
-            press: () {},
-          ),
+          // ProfileMenu(
+          //   text: "Settings",
+          //   icon: "assets/icons/Settings.svg",
+          //   press: () {},
+          // ),
           ProfileMenu(
             text: "Help Center",
             icon: "assets/icons/Question mark.svg",

@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../../../size_config.dart';
+import 'package:krishak_farma/screens/home/components/addproduct.dart';
+import 'package:krishak_farma/screens/home/components/advice.dart';
+import 'package:krishak_farma/screens/home/components/flash_deal.dart';
+import 'package:krishak_farma/screens/home/components/market_view.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+
 
 
 
@@ -37,11 +43,11 @@ class Categories extends StatelessWidget
   Widget build(BuildContext context)
   {
     List<Map<String, dynamic>> categories = [
-      {"icon": "assets/icons/Flash Icon.svg", "text": "Flash Deal","url":"https://youtube.com/"},
-      {"icon": "assets/icons/adviceImage2.svg", "text": "Advice","url":"https://udemy.com/"},
+      {"icon": "assets/icons/Flash Icon.svg", "text": "Flash Deal","key":"1"},
+      {"icon": "assets/icons/adviceImage2.svg", "text": "Advice","key":"2"},
       //{"icon": "assets/icons/Game Icon.svg", "text": "Game"},
-      {"icon": "assets/icons/Market View2.svg", "text": "Market View","url":"https://msamb.com/"},
-      {"icon": "assets/icons/Discover.svg", "text": " Add Product","url":"https://amazon.com/"},
+      {"icon": "assets/icons/Market View2.svg", "text": "Market View","key":"3"},
+      {"icon": "assets/icons/Discover.svg", "text": " Add Product","key":"4"},
     ];
     return Padding(
       padding: EdgeInsets.all(getProportionateScreenWidth(20)),
@@ -55,7 +61,38 @@ class Categories extends StatelessWidget
             text: categories[index]["text"],
 
 
-            press: ()=>openURL1(categories[index]["url"]),
+            press: (){
+           if(categories[index]["key"]=="1") // Flash deal
+           {
+             Navigator.push(context,
+               MaterialPageRoute(builder: (context)=>FlashDeal())
+             );
+             Fluttertoast.showToast(msg: "Flash Deal");
+           }
+           else if(categories[index]["key"]=="2")  // Advice
+           {
+             Navigator.push(context,
+               MaterialPageRoute(builder: (context)=>Advice())
+             );
+             Fluttertoast.showToast(msg: "Advice");
+           }
+           else if(categories[index]["key"]=="3") // Market view
+           {
+              Navigator.push(context,
+                MaterialPageRoute(builder: (context)=>MarketView())
+              );
+              Fluttertoast.showToast(msg: "Market View");
+           }
+           else if(categories[index]["key"]=="4") // Add product
+           {
+             Navigator.push(context,
+               MaterialPageRoute(builder: (context)=>AddProduct())
+             );
+             Fluttertoast.showToast(msg: "Add Product");
+
+           }
+            }
+
 
           ),
 

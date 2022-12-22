@@ -481,20 +481,9 @@ class _AddProductState extends State<AddProduct> {
   final TextEditingController amount_c = TextEditingController();
   FocusNode amount_ = FocusNode();
   final List<String> _item = [
-    // 'food',
-    // "Transfer",
-    // "Transportation",
-    // "Education"
-    // "Apple",
-    // "Banana",
-    // "Grapes",
-
-
-          "Apple",
-      "Banana",
-      "Grapes",
-      "Orange", "Cotton", "Brinjal", "Wheat", "Corn", "Lady_Finger","Gram", "Peanut", "Soyabin",
-      "Cabbage", "Marigold", "Mogara", "Onion", "Garlic", "Carrot", "Tomato", "Raddish"
+    "Apple", "Banana", "Grapes", "Orange", "Cotton", "Brinjal", "Wheat", "Corn", "Lady_Finger","Gram", "Peanut", "Soyabin",
+      "Cabbage", "Marigold", "Mogara", "Onion", "Garlic", "Carrot", "Tomato", "Raddish","Sapodila","Sugarcan","Patato","Ginger",
+    "Mustard"
   ];
   final List<String> _itemei = [
     'Income',
