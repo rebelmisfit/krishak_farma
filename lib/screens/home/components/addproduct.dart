@@ -1003,8 +1003,20 @@ class _AddProductState extends State<AddProduct> {
   final List<String> _item = [
     "Apple", "Banana", "Grapes", "Orange", "Cotton", "Brinjal", "Wheat", "Corn", "Lady_Finger","Gram", "Peanut", "Soyabin",
       "Cabbage", "Marigold", "Mogara", "Onion", "Garlic", "Carrot", "Tomato", "Raddish","Sapodila","Sugarcan","Patato","Ginger",
-    "Mustard"
+    "Mustard", "Coriander", "Caulflower", "Shepu", "Fenugreek", "Ambadi", "BitterGaurd", "DrumStick", "Chawali",
+   "Masoor", "Moong", "Mataki", "Pea", "Ailanthus", "Allspice", "Almond", "Alovera", "Antherium","Arecanut",
+    "AshGourd", "Ashwagandha", "Beans", "Beatroot", "BengalGram", "Ber", "Betelvine", "Bajra", "Brocali", "BlackGram",
+    "BottleGourd",  "Capsicum", "Mango", "Cardamom", "CashewNut", "Champak", "Chive", "Cinnamon",
+    "CitronellaGrass", "Colve", "Cocoa", "Coconut", "Coffee", "Coleus", "Cowpea", "Cucumber", "Cumin",
+    "CurryLeaves", "Rose", "Daylily", "Dill", "DragonFruit", "Fig", "FoxTailMillet", "FrenchBean",
+     "Guava", "Jackfruit", "Jasmine", "Lemon", "Mint", "PearlMillet", "Pomegranate","Pumpkin", "Rice", "Rubber",
+    "Sunflower", "Strawbery", "Tamarind","Tea", "Termeric", "Watermelon", "Vanila", "Walnut"
+
+
   ];
+
+
+
   final List<String> _itemei = [
     'Income',
     "Expand",
@@ -1478,6 +1490,7 @@ class _AddProductState extends State<AddProduct> {
   }
   Padding Product() {
 
+   _item.sort();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
 
