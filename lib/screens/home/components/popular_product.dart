@@ -20,6 +20,7 @@ class PopularProducts extends StatelessWidget {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
+
             children: [
               ...List.generate(
                 demoProducts.length,
@@ -31,7 +32,7 @@ class PopularProducts extends StatelessWidget {
                       .shrink(); // here by default width and height is 0
                 },
               ),
-              SizedBox(width: getProportionateScreenWidth(20)),
+              //SizedBox(width: getProportionateScreenWidth(20)),
             ],
           ),
         )

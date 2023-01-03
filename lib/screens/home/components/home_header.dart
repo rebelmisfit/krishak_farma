@@ -25,7 +25,7 @@ class HomeHeader extends StatelessWidget {
             press: () {
               //Navigator.push(context, MaterialPageRoute(builder:(context)=> CartScreen()));
               //Navigator.push(context, MaterialPageRoute(builder:(context)=> CustomAppBar(rating: 100.0)));
-              Navigator.pushNamed(context, AddProduct.routeName);
+              //Navigator.pushNamed(context, AddProduct.routeName);
             }
           ),
           //Admin(),  // removed from search field add cart

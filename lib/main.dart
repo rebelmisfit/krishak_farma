@@ -55,6 +55,7 @@ class MyApp extends StatelessWidget
 
     return  OverlaySupport(
       child: MaterialApp(
+
         debugShowCheckedModeBanner: false,
         initialRoute: SplashScreen.routeName,
         routes: routes,

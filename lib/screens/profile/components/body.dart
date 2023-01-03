@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../models/user_model.dart';
 import '../../home/components/myaccount.dart';
+import '../../home/components/notifications.dart';
 import '../../sign_in/sign_in_screen.dart';
 import 'profile_menu.dart';
 import 'profile_pic.dart';
@@ -52,7 +53,7 @@ class _BodyState extends State<Body> {
           ProfileMenu(
             text: "Notifications",
             icon: "assets/icons/Bell.svg",
-            press: () {},
+            press: () =>  Navigator.of(context).push(MaterialPageRoute(builder:(context)=> Notifications()),),
           ),
           // ProfileMenu(
           //   text: "Settings",

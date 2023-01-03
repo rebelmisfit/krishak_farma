@@ -109,11 +109,19 @@ class _SignUpFormState extends State<SignUpForm> {
         return null;
       },
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         labelText: "Confirm Password",
+        labelStyle: TextStyle(fontSize: 17, color: Colors.grey.shade500),
         hintText: "Re-enter your password",
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(width: 2, color: Color(0xffC5C5C5))),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(width: 2, color: Colors.deepOrangeAccent)),
         suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
       ),
     );
@@ -148,10 +156,19 @@ class _SignUpFormState extends State<SignUpForm> {
         firstNameEditingController.text=value!;
       },
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+
         labelText: "Name",
+        labelStyle: TextStyle(fontSize: 17, color: Colors.grey.shade500),
         hintText: "Enter your Name",
 
         floatingLabelBehavior: FloatingLabelBehavior.always,
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(width: 2, color: Color(0xffC5C5C5))),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(width: 2, color: Colors.deepOrangeAccent)),
         suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
       ),
     );
@@ -185,10 +202,18 @@ class _SignUpFormState extends State<SignUpForm> {
 
 
       decoration: InputDecoration(
-        labelText: "SurName",
+        contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+        labelText: "Surname",
+        labelStyle: TextStyle(fontSize: 17, color: Colors.grey.shade500),
         hintText: "Enter your SurName",
 
         floatingLabelBehavior: FloatingLabelBehavior.always,
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(width: 2, color: Color(0xffC5C5C5))),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(width: 2, color: Colors.deepOrangeAccent)),
         //suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
       ),
     );
@@ -225,11 +250,19 @@ class _SignUpFormState extends State<SignUpForm> {
         return null;
       },
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         labelText: "Password",
+        labelStyle: TextStyle(fontSize: 17, color: Colors.grey.shade500),
         hintText: "Enter your password",
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(width: 2, color: Color(0xffC5C5C5))),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(width: 2, color: Colors.deepOrangeAccent)),
         suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
       ),
     );
@@ -264,11 +297,19 @@ class _SignUpFormState extends State<SignUpForm> {
         return null;
       },
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         labelText: "Email",
+        labelStyle: TextStyle(fontSize: 17, color: Colors.grey.shade500),
         hintText: "Enter your email",
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(width: 2, color: Color(0xffC5C5C5))),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(width: 2, color: Colors.deepOrangeAccent)),
         suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
       ),
     );

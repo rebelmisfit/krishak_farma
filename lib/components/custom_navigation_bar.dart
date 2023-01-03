@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:krishak_farma/screens/home/components/flash_deal.dart';
+import 'package:krishak_farma/screens/home/components/market%20view.dart';
 
 
 import '../constants.dart';
@@ -66,7 +68,8 @@ class CustomBottomNavBar extends StatelessWidget {
               IconBtnWithCounter(
                 svgSrc: "assets/icons/Bell.svg",
                 numOfitem: 1, // here we have to edit
-                press: () =>  Navigator.of(context).push(MaterialPageRoute(builder:(context)=> Notifications()),),
+                 press: () =>  Navigator.of(context).push(MaterialPageRoute(builder:(context)=> Notifications()),),
+                //press: () =>  Navigator.of(context).push(MaterialPageRoute(builder:(context)=> MarketView()),),
               ),
               IconButton(
                 icon: SvgPicture.asset("assets/icons/Conversation.svg"),
@@ -92,3 +95,4 @@ class CustomBottomNavBar extends StatelessWidget {
     );
   }
 }
+

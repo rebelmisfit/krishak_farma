@@ -966,10 +966,10 @@ import '../../../components/custom_surfix_icon.dart';
 import '../../../models/add_date.dart';
 
 class AddProduct extends StatefulWidget {
-  var txt;
+  String? txt=" ";
   static String routeName = "/addproduct";
 
-  AddProduct( {Key? key,this.txt}) : super(key: key);
+  AddProduct( {Key? key,required this.txt }) : super(key: key);
 
   @override
   _AddProductState createState() => _AddProductState();
@@ -1001,19 +1001,20 @@ class _AddProductState extends State<AddProduct> {
   final TextEditingController amount_c = TextEditingController();
   FocusNode amount_ = FocusNode();
   final List<String> _item = [
-<<<<<<< HEAD
+//<<<<<<< HEAD
     "Apple", "Banana", "Grapes", "Orange", "Cotton", "Brinjal", "Wheat", "Corn", "Lady_Finger","Gram", "Peanut", "Soyabin",
-      "Cabbage", "Marigold", "Mogara", "Onion", "Garlic", "Carrot", "Tomato", "Raddish","Sapodila","Sugarcan","Patato","Ginger",
-    "Mustard"
-=======
+      "Cabbage", "Marigold", "Mogara", "Onion", "Garlic", "Carrot", "Tomato", "Raddish","Sapodila","Patato",//"Ginger",
+    //"Sugarcan"
+    //"Mustard"
+//=======
 
 
-    "Apple",
-    "Banana",
-    "Grapes",
-    "Orange", "Cotton", "Brinjal", "Wheat", "Corn", "Lady_Finger","Gram", "Peanut", "Soyabin",
-    "Cabbage", "Marigold", "Mogara", "Onion", "Garlic", "Carrot", "Tomato", "Raddish"
->>>>>>> 756ddc2ccc7c596e66d5b86b25ff94aacb17054a
+    // "Apple",
+    // "Banana",
+    // "Grapes",
+    // "Orange", "Cotton", "Brinjal", "Wheat", "Corn", "Lady_Finger","Gram", "Peanut", "Soyabin",
+    // "Cabbage", "Marigold", "Mogara", "Onion", "Garlic", "Carrot", "Tomato", "Raddish"
+//>>>>>>> 756ddc2ccc7c596e66d5b86b25ff94aacb17054a
   ];
   final List<String> _itemei = [
     'Income',
@@ -1419,7 +1420,7 @@ class _AddProductState extends State<AddProduct> {
           //suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Discover.svg",),
           suffixIcon:IconButton(
               icon: SvgPicture.asset(
-                "assets/icons/Discover.svg",
+                "assets/icons/Locationpoint.svg",
 
               ),
 
@@ -1616,6 +1617,7 @@ class _AddProductState extends State<AddProduct> {
 
 
   }
+
   Future createProduct(Products user) async{
     final docUser=FirebaseFirestore.instance.collection('products').doc();
     //user.id=docUser.id;
@@ -1646,12 +1648,25 @@ class Products{
 
 
   Map<String ,dynamic> toJson()=>
-      {
-        'name':name,
-        'Product':product,
-        'Quantity in KG':Quantity,
-        'Mobileno':mobileno,
-        'Location':location,
-        'Deal_Date':dealDate
-      };
+  {
+    'name':name,
+    'Product':product,
+    'Quantity in KG':Quantity,
+    'Mobileno':mobileno,
+    'Location':location,
+    'Deal_Date':dealDate
+  };
+
+  static Products fromJson(Map<String,dynamic> json)=>Products(
+    name: json['name'],
+    product: json['Product'],
+    Quantity: json['Quantity'],
+    mobileno: json['Mobileno'],
+    location: json['Location'],
+    dealDate: json['Deal_Date'] ,
+
+
+  );
+
+
 }
