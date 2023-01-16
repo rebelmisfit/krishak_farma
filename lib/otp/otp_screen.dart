@@ -6,14 +6,18 @@ import 'components/body.dart';
 
 class OtpScreen extends StatelessWidget {
   static String routeName = "/otp";
+  String email;
+  OtpScreen(this.email);
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("OTP Verification"),
+        backgroundColor: Colors.deepOrangeAccent,
       ),
-      body: Body(),
+      body: Body(email),
     );
   }
 }

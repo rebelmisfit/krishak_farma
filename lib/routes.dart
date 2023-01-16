@@ -2,6 +2,7 @@
 
 
 
+
 import 'package:flutter/cupertino.dart';
 import 'package:krishak_farma/screens/cart/cart_screen.dart';
 import 'package:krishak_farma/screens/details/details_screen.dart';
@@ -12,9 +13,10 @@ import 'package:krishak_farma/screens/loginsucessscreen/login_sucess_screen.dart
 import 'package:krishak_farma/screens/message.dart';
 import 'package:krishak_farma/screens/profile/profile_screen.dart';
 import 'package:krishak_farma/screens/sign_in/sign_in_screen.dart';
+import 'package:krishak_farma/screens/sign_up/components/verifyemailform.dart';
 import 'package:krishak_farma/screens/sign_up/sign_up_screen.dart';
 import 'package:krishak_farma/screens/splash/splash_screen.dart';
-
+import 'package:krishak_farma/screens/sign_up/components/verifyemailform.dart';
 import 'otp/otp_screen.dart';
 
 final Map<String, WidgetBuilder> routes = {
@@ -33,7 +35,7 @@ final Map<String, WidgetBuilder> routes = {
   LoginSuccessScreen.routeName: (context) => LoginSuccessScreen(),
   SignUpScreen.routeName: (context) => SignUpScreen(),
   //CompleteProfileScreen.routeName: (context) => CompleteProfileScreen(),
-  OtpScreen.routeName: (context) => OtpScreen(),
+  // OtpScreen.routeName: (context) => OtpScreen(),
   HomeScreen.routeName: (context) => HomeScreen(),
   DetailsScreen.routeName: (context) => DetailsScreen(),
   CartScreen.routeName: (context) => CartScreen(),

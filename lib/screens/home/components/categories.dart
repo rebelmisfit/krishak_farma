@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:krishak_farma/MobileAuth/mobile_login.dart';
+import 'package:krishak_farma/MobileAuth/mobile_otp.dart';
+
+import 'package:krishak_farma/otp/otp_screen.dart';
+import 'package:krishak_farma/screens/sign_up/components/verifyemailform.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../size_config.dart';
 import 'package:krishak_farma/screens/home/components/addproduct.dart';
@@ -64,15 +69,21 @@ class Categories extends StatelessWidget
             press: (){
            if(categories[index]["key"]=="1") // Flash deal
            {
-             Navigator.push(context,
-               MaterialPageRoute(builder: (context)=>FlashDeal())
+             // Navigator.push(context,
+             //   MaterialPageRoute(builder: (context)=>FlashDeal())
+             // );
+             Navigator.pushReplacement(context,
+               MaterialPageRoute(builder: (context) => MobileLogin())
              );
              Fluttertoast.showToast(msg: "Flash Deal");
            }
            else if(categories[index]["key"]=="2")  // Advice
            {
-             Navigator.push(context,
-               MaterialPageRoute(builder: (context)=>Advice())
+             // Navigator.push(context,
+             //   MaterialPageRoute(builder: (context)=>Advice())
+             // );
+             Navigator.pushReplacement(context,
+               MaterialPageRoute(builder: (context) => MobileOTP())
              );
              Fluttertoast.showToast(msg: "Advice");
            }
