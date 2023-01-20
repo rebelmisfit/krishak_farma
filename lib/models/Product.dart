@@ -99,24 +99,24 @@ List<Product> demoProducts = [
     isFavourite: true,
     isPopular: true,
   ),
-  Product(
-    id: 5,
-    images: [
-      "assets/images/Dragon Fruit1.png",
-    ],
-    colors: [
-      Color(0xFFF6625E),
-      Color(0xFF836DB8),
-      Color(0xFFDECB9C),
-      Colors.white,
-    ],
-    title: "Dragon Fruit",
-    price: 120,
-    description: description,
-    rating: 4.1,
-    isFavourite: true,
-    isPopular: true,
-  ),
+  // Product(
+  //   id: 5,
+  //   images: [
+  //     "assets/images/Dragon Fruit1.png",
+  //   ],
+  //   colors: [
+  //     Color(0xFFF6625E),
+  //     Color(0xFF836DB8),
+  //     Color(0xFFDECB9C),
+  //     Colors.white,
+  //   ],
+  //   title: "Dragon Fruit",
+  //   price: 120,
+  //   description: description,
+  //   rating: 4.1,
+  //   isFavourite: true,
+  //   isPopular: true,
+  // ),
   Product(
     id: 6,
     images: [
@@ -135,24 +135,24 @@ List<Product> demoProducts = [
     isFavourite: true,
     isPopular: true,
   ),
-  Product(
-    id: 7,
-    images: [
-      "assets/images/Brussels Sprout1.png",
-    ],
-    colors: [
-      Color(0xFFF6625E),
-      Color(0xFF836DB8),
-      Color(0xFFDECB9C),
-      Colors.white,
-    ],
-    title: "Brussels Sprout",
-    price: 40,
-    description: description,
-    rating: 4.1,
-    isFavourite: true,
-    isPopular: true,
-  ),
+  // Product(
+  //   id: 7,
+  //   images: [
+  //     "assets/images/Brussels Sprout1.png",
+  //   ],
+  //   colors: [
+  //     Color(0xFFF6625E),
+  //     Color(0xFF836DB8),
+  //     Color(0xFFDECB9C),
+  //     Colors.white,
+  //   ],
+  //   title: "Brussels Sprout",
+  //   price: 40,
+  //   description: description,
+  //   rating: 4.1,
+  //   isFavourite: true,
+  //   isPopular: true,
+  //),
   Product(
     id: 8,
     images: [

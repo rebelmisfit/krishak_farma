@@ -64,6 +64,7 @@ dependencies:
   intl: ^0.17.0
   dialog_flowtter:
   marquee: ^2.2.3
+  firebase_storage:
 
 
 dev_dependencies:
