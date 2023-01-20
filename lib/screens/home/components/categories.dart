@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:krishak_farma/screens/home/components/market%20view.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../size_config.dart';
 import 'package:krishak_farma/screens/home/components/addproduct.dart';
 import 'package:krishak_farma/screens/home/components/advice.dart';
 import 'package:krishak_farma/screens/home/components/flash_deal.dart';
-
+import 'package:krishak_farma/screens/home/components/market_view.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 
@@ -17,16 +16,16 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 
 
-// openURL1(url) async {
-//   if(await canLaunch(url)){
-//     await launch(url);
-//
-//   }
-//   else
-//   {
-//     throw 'could not lunch url';
-//   }
-// }
+openURL1(url) async {
+  if(await canLaunch(url)){
+    await launch(url);
+
+  }
+  else
+  {
+    throw 'could not lunch url';
+  }
+}
 
 
 
@@ -58,40 +57,41 @@ class Categories extends StatelessWidget
         children: List.generate(
           categories.length,
               (index) => CategoryCard(
-              icon: categories[index]["icon"],
-              text: categories[index]["text"],
+            icon: categories[index]["icon"],
+            text: categories[index]["text"],
 
 
-              press: (){
-                if(categories[index]["key"]=="1") // Flash deal
-                    {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context)=>FlashDeal())
-                  );
-                  Fluttertoast.showToast(msg: "Flash Deal");
-                }
-                else if(categories[index]["key"]=="2")  // Advice
-                    {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context)=>Advice())
-                  );
-                  Fluttertoast.showToast(msg: "Advice");
-                }
-                else if(categories[index]["key"]=="3") // Market view
-                    {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context)=>MarketView(),) );
-                  Fluttertoast.showToast(msg: "Market View");
-                }
-                else if(categories[index]["key"]=="4") // Add product
-                    {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context)=>AddProduct(txt: " ",))
-                  );
-                  Fluttertoast.showToast(msg: "Add Product");
+            press: (){
+           if(categories[index]["key"]=="1") // Flash deal
+           {
+             Navigator.push(context,
+               MaterialPageRoute(builder: (context)=>FlashDeal())
+             );
+             Fluttertoast.showToast(msg: "Flash Deal");
+           }
+           else if(categories[index]["key"]=="2")  // Advice
+           {
+             Navigator.push(context,
+               MaterialPageRoute(builder: (context)=>Advice())
+             );
+             Fluttertoast.showToast(msg: "Advice");
+           }
+           else if(categories[index]["key"]=="3") // Market view
+           {
+              Navigator.push(context,
+                MaterialPageRoute(builder: (context)=>MarketView())
+              );
+              Fluttertoast.showToast(msg: "Market View");
+           }
+           else if(categories[index]["key"]=="4") // Add product
+           {
+             Navigator.push(context,
+               MaterialPageRoute(builder: (context)=>AddProduct())
+             );
+             Fluttertoast.showToast(msg: "Add Product");
 
-                }
-              }
+           }
+            }
 
 
           ),

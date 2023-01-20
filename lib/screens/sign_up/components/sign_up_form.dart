@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:krishak_farma/otp/otp_screen.dart';
 
 import '../../../components/custom_surfix_icon.dart';
 import '../../../components/default_button.dart';
@@ -11,7 +12,7 @@ import '../../../constants.dart';
 import '../../../models/user_model.dart';
 import '../../../size_config.dart';
 import '../../home/home_screen.dart';
-
+import 'package:krishak_farma/screens/sign_up/components/verifyemailform.dart';
 
 class SignUpForm extends StatefulWidget {
   @override
@@ -71,9 +72,14 @@ class _SignUpFormState extends State<SignUpForm> {
             press: () {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
-                // if all are valid then go to success screen
-                //Navigator.pushNamed(context, CompleteProfileScreen.routeName);
                 SignUp(emailEditingController.text, passwordEditingController.text);
+                Navigator.push(context,
+                  MaterialPageRoute(builder: (context)=> VerifyEmail(),
+                  )
+                );
+                // SignUp(emailEditingController.text, passwordEditingController.text);
+
+                // if all are valid then go to success screen
               }
             },
           ),
@@ -318,6 +324,7 @@ class _SignUpFormState extends State<SignUpForm> {
   }
   void SignUp(String email,String password) async
   {
+
     if(_formKey.currentState!.validate())
       {
         await _auth.createUserWithEmailAndPassword(email: email, password: password).then((value) => {
@@ -350,7 +357,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
     Fluttertoast.showToast(msg: "Account Created Sucessfully !");
 
-    Navigator.pushAndRemoveUntil((context), MaterialPageRoute(builder: (context)=>HomeScreen()), (route) => false);
+    // Navigator.pushAndRemoveUntil((context), MaterialPageRoute(builder: (context)=>HomeScreen()), (route) => false);
 
 
 
