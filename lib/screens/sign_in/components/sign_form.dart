@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../../components/custom_surfix_icon.dart';
@@ -41,6 +42,7 @@ class _SignFormState extends State<SignForm> {
   }
   final TextEditingController emailController=new TextEditingController();
   final TextEditingController passwordController=new TextEditingController();
+  final storage=new FlutterSecureStorage();
 
   // firebase
 
@@ -213,6 +215,12 @@ class _SignFormState extends State<SignForm> {
           }).catchError((e){
             Fluttertoast.showToast(msg: e!.message);
           });
+        // UserCredential userCredential =await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+        // print(userCredential.user?.uid);
+        // await storage.write(key: "uid", value:userCredential.user?.uid );
+        // Fluttertoast.showToast(msg: "Login Sucessful");
+        // Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+
       }
   }
 }

@@ -28,8 +28,8 @@ List<Product> demoProducts = [
     id: 1,
     images: [
       "assets/images/Almonds.png",
-      //borderRadius: BorderRadius.circular(10),
-      //"assets/images/tomatos3.png",// to make small preview when description is open
+
+
     ],
     colors: [
       Color(0xFFF6625E),

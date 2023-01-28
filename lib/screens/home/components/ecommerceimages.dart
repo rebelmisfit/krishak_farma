@@ -251,10 +251,29 @@ openURL5() async {
   }
 }
 
-class EcommerceImage extends StatelessWidget {
+class EcommerceImage extends StatefulWidget {
   const EcommerceImage({
     Key? key,
   }) : super(key: key);
+
+
+  @override
+  State<EcommerceImage> createState() => _EcommerceImageState();
+}
+
+class _EcommerceImageState extends State<EcommerceImage> {
+  late bool _isLoading;
+  @override
+  void initState() {
+    _isLoading = true;
+    Future.delayed(const Duration(seconds: 2), () {
+      setState(() {
+        _isLoading = false;
+      });
+    });
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -294,11 +313,70 @@ class EcommerceImage extends StatelessWidget {
                         return Container(
                           width: MediaQuery.of(context).size.width/1.2,
                           height: MediaQuery.of(context).size.width/1.2,
-                          child: CircularProgressIndicator(),
+                          //child: CircularProgressIndicator(),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Skeleton(
+                                height: 120,
+                                width: 120,
+                              ),
+                              const SizedBox(width: 16,),
+                              Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Skeleton(width:80),
+                                  const SizedBox(height: 8,),
+                                  const Skeleton(),
+                                  const SizedBox(height: 8,),
+                                  const Skeleton(),
+                                  const SizedBox(height: 8,),
+                                  Row(
+                                    children: const[
+                                      Expanded(child: Skeleton()),
+                                      SizedBox(width: 16,),
+                                      Expanded(child: Skeleton()),
+                                    ],
+                                  )
+
+                                ],
+                              ))
+                            ],
+                          )
                         );
                       }
 
-                      return Container();
+                      return Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                      const Skeleton(
+                      height: 120,
+                      width: 120,
+                      ),
+                      const SizedBox(width: 16,),
+                      Expanded(
+                      child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                      const Skeleton(width:80),
+                      const SizedBox(height: 8,),
+                      const Skeleton(),
+                      const SizedBox(height: 8,),
+                      const Skeleton(),
+                      const SizedBox(height: 8,),
+                      Row(
+                      children: const[
+                      Expanded(child: Skeleton()),
+                      SizedBox(width: 16,),
+                      Expanded(child: Skeleton()),
+                      ],
+                      )
+
+                      ],
+                      ))
+                      ],
+                      );
 
                     },
                     future: _getImage(context, "Banners/Banner1.png"),
@@ -324,11 +402,70 @@ class EcommerceImage extends StatelessWidget {
                         return Container(
                           width: MediaQuery.of(context).size.width/1.2,
                           height: MediaQuery.of(context).size.width/1.2,
-                          child: CircularProgressIndicator(),
+                          //child: CircularProgressIndicator(),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Skeleton(
+                                  height: 120,
+                                  width: 120,
+                                ),
+                                const SizedBox(width: 16,),
+                                Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        const Skeleton(width:80),
+                                        const SizedBox(height: 8,),
+                                        const Skeleton(),
+                                        const SizedBox(height: 8,),
+                                        const Skeleton(),
+                                        const SizedBox(height: 8,),
+                                        Row(
+                                          children: const[
+                                            Expanded(child: Skeleton()),
+                                            SizedBox(width: 16,),
+                                            Expanded(child: Skeleton()),
+                                          ],
+                                        )
+
+                                      ],
+                                    ))
+                              ],
+                            )
                         );
                       }
 
-                      return Container();
+                      return Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                      const Skeleton(
+                      height: 120,
+                      width: 120,
+                      ),
+                      const SizedBox(width: 16,),
+                      Expanded(
+                      child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                      const Skeleton(width:80),
+                      const SizedBox(height: 8,),
+                      const Skeleton(),
+                      const SizedBox(height: 8,),
+                      const Skeleton(),
+                      const SizedBox(height: 8,),
+                      Row(
+                      children: const[
+                      Expanded(child: Skeleton()),
+                      SizedBox(width: 16,),
+                      Expanded(child: Skeleton()),
+                      ],
+                      )
+
+                      ],
+                      ))
+                      ],
+                      );
 
                     },
                     future: _getImage(context, "Banners/Banner2.png"),
@@ -421,7 +558,6 @@ class EcommerceImage extends StatelessWidget {
     );
   }
 
-
   Future<Widget> _getImage(BuildContext context, String ImageName) async
   {
     late Image mimage;
@@ -507,6 +643,49 @@ class SpecialOfferCard extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+const Color primaryColor = Color(0xFF2967FF);
+const Color grayColor = Color(0xFF8D8D8E);
+
+const double defaultPadding = 16.0;
+
+
+class Skeleton extends StatelessWidget {
+  const Skeleton({Key? key, this.height, this.width}) : super(key: key);
+
+  final double? height, width;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: height,
+      width: width,
+      padding: const EdgeInsets.all(defaultPadding / 2),
+      decoration: BoxDecoration(
+          color: Colors.black.withOpacity(0.04),
+          borderRadius:
+          const BorderRadius.all(Radius.circular(defaultPadding))),
+    );
+  }
+}
+
+class CircleSkeleton extends StatelessWidget {
+  const CircleSkeleton({Key? key, this.size = 24}) : super(key: key);
+
+  final double? size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: size,
+      width: size,
+      decoration: BoxDecoration(
+        color: Theme.of(context).primaryColor.withOpacity(0.04),
+        shape: BoxShape.circle,
       ),
     );
   }

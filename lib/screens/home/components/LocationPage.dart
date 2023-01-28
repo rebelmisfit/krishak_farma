@@ -100,7 +100,7 @@ class _LocationPageState extends State<LocationPage> {
                 ),
                 onPressed: (){
                   Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) =>AddProduct(txt:_currentAddress,))
+                    MaterialPageRoute(builder: (context) =>AddProduct(txt:_currentAddress!,))
                   );
                 },
                 child: const Text("Go back to Add page"),

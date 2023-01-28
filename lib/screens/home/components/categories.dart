@@ -5,8 +5,10 @@ import '../../../size_config.dart';
 import 'package:krishak_farma/screens/home/components/addproduct.dart';
 import 'package:krishak_farma/screens/home/components/advice.dart';
 import 'package:krishak_farma/screens/home/components/flash_deal.dart';
-import 'package:krishak_farma/screens/home/components/market_view.dart';
+
 import 'package:fluttertoast/fluttertoast.dart';
+
+import 'market view.dart';
 
 
 
@@ -86,7 +88,7 @@ class Categories extends StatelessWidget
            else if(categories[index]["key"]=="4") // Add product
            {
              Navigator.push(context,
-               MaterialPageRoute(builder: (context)=>AddProduct())
+               MaterialPageRoute(builder: (context)=>AddProduct(txt: '',))
              );
              Fluttertoast.showToast(msg: "Add Product");
 

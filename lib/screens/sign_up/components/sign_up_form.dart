@@ -73,9 +73,13 @@ class _SignUpFormState extends State<SignUpForm> {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
                 SignUp(emailEditingController.text, passwordEditingController.text);
+                // Navigator.push(context,
+                //   MaterialPageRoute(builder: (context)=> VerifyEmail(),
+                //   )
+                // );
                 Navigator.push(context,
-                  MaterialPageRoute(builder: (context)=> VerifyEmail(),
-                  )
+                    MaterialPageRoute(builder: (context)=> HomeScreen(),
+                    )
                 );
                 // SignUp(emailEditingController.text, passwordEditingController.text);
 

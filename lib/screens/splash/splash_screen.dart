@@ -1,5 +1,9 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:krishak_farma/MobileAuth/mobile_login.dart';
+import 'package:krishak_farma/screens/home/home_screen.dart';
 
 import '../../constants.dart';
 import '../../size_config.dart';
@@ -13,16 +17,42 @@ class  SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
 }
 class _SplashScreenState extends State<SplashScreen> {
+  var auth =FirebaseAuth.instance;
+  var isLogin =false;
+  checkIfLogin() async{
+    auth.authStateChanges().listen((User? user) {
+      if(user!=null && mounted){
+        setState(() {
+          isLogin=true;
+        });
+      }
+    });
+  }
+
   void initState()
   {
+    checkIfLogin();
     super.initState();
     _navigatetohome();
   }
   _navigatetohome()async
   {
     await Future.delayed(Duration(milliseconds: 3000),(){});// await for 1.5 seconds
-    Navigator.pushReplacement(context, MaterialPageRoute(builder:(context)=> SignInScreen())); // and then navigate to home screen
+
+    if(isLogin==true)
+    {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder:(context)=> HomeScreen()));
+    }
+    else
+    {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder:(context)=> SignInScreen()));
+      //Navigator.pushReplacement(context, MaterialPageRoute(builder:(context)=> MobileLogin()));
+
+    }
+
+
   }
+
 
 
   @override

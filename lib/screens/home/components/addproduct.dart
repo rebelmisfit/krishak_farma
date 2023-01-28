@@ -2624,10 +2624,10 @@ import '../../../components/custom_surfix_icon.dart';
 import '../../../models/add_date.dart';
 
 class AddProduct extends StatefulWidget {
-  var txt;
+  var txt="select location Press icon";
   static String routeName = "/addproduct";
 
-  AddProduct( {Key? key,this.txt}) : super(key: key);
+  AddProduct( {Key? key,required this.txt}) : super(key: key);
 
   @override
   _AddProductState createState() => _AddProductState();
@@ -2747,8 +2747,8 @@ class _AddProductState extends State<AddProduct> {
         final products=Products(
           name:controllerName.text,
           product: selctedItem!,
-          Quantity: int.parse(controllerQuantity.text),
-          mobileno: int.parse(controllerMobileNo.text),
+          Quantity: controllerQuantity.text,
+          mobileno: controllerMobileNo.text,
           location:"${widget.txt}",
           dealDate:date,
 
@@ -3290,8 +3290,8 @@ class _AddProductState extends State<AddProduct> {
 class Products{
   final String name;
   final String product;
-  final int Quantity;
-  final int mobileno;
+  final String Quantity;///
+  final String mobileno;
   var location;
   final DateTime dealDate;
   Products({
