@@ -824,6 +824,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  javascript:
+    dependency: "direct main"
+    description:
+      name: javascript
+      sha256: e9f0f6492c3a626ea365c83beb1e557c69361ee9a4a3e7cd56d25533df8364ef
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
   js:
     dependency: transitive
     description:
