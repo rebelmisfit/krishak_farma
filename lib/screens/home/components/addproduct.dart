@@ -2614,14 +2614,27 @@
 
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dialog_flowtter/dialog_flowtter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:krishak_farma/screens/home/components/LocationPage.dart';
+import 'package:krishak_farma/screens/home/components/addressselection/Loacationautofill.dart';
+import 'package:krishak_farma/screens/home/components/addressselection/network_utility.dart';
+import 'package:krishak_farma/screens/home/home_screen.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../components/custom_surfix_icon.dart';
 import '../../../models/add_date.dart';
+
+import 'package:uuid/uuid.dart';
+
+
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+
 
 class AddProduct extends StatefulWidget {
   var txt="select location Press icon";
@@ -2641,6 +2654,13 @@ class _AddProductState extends State<AddProduct> {
   final controllerMobileNo=TextEditingController();
   final controllerLocation=TextEditingController();
   final controllerDealDate=TextEditingController();
+   DateTime startBidingDate= new DateTime.now();
+   DateTime endBidingDate = new DateTime.now();
+  TimeOfDay startTime = new TimeOfDay.now();
+  TimeOfDay endTime = new TimeOfDay.now();
+
+
+
 
 
 
@@ -2653,7 +2673,7 @@ class _AddProductState extends State<AddProduct> {
   DateTime date = new DateTime.now();
   String? selctedItem;
   String? selctedItemi;
-  String ? locationn;
+
   final TextEditingController expalin_C = TextEditingController();
   FocusNode ex = FocusNode();
   final TextEditingController amount_c = TextEditingController();
@@ -2672,7 +2692,10 @@ class _AddProductState extends State<AddProduct> {
 
 
   ];
-
+  // List<PlacesSearchResult> searchResults = [];
+  // late PlacesAutocompleteResponse autocompleteResponse;
+  // late GoogleMapController mapController;
+  String apiKey="AIzaSyA0YP0uj7CM8wISZLQ3z-BluBG-f30PnBo";
 
 
   final List<String> _itemei = [
@@ -2689,6 +2712,55 @@ class _AddProductState extends State<AddProduct> {
     amount_.addListener(() {
       setState(() {});
     });
+    controllerLocation.addListener(() {
+      if (controllerLocation.text.isEmpty) {
+        setState(() {
+          // searchResults = [];
+        });
+        return;
+      }
+
+      // getAutocomplete();
+    });
+
+  }
+
+  void onMapCreated(GoogleMapController controller) {
+    // mapController = controller;
+  }
+
+  // Future<void> getAutocomplete() async {
+  //   final places = new GoogleMapsPlaces(apiKey: "YOUR_API_KEY");
+  //   PlacesAutocompleteResponse response = await places.autocomplete(
+  //     controllerLocation.text,
+  //     types: ['(cities)'],
+  //   );
+  //   if (response.isOkay) {
+  //     setState(() {
+  //       autocompleteResponse = response;
+  //       // searchResults = response.result;
+  //     });
+  //   } else {
+  //     print('Error: ${response.errorMessage}');
+  //   }
+  // }
+
+  Future<void> placeAutocomplete(String query)
+  async {
+    Uri uri = Uri.http("maps.googleapis.com",
+        "maps/api/place/autocomplete/json",
+    {
+      "input":query,
+      "key":apiKey,
+
+    });
+
+    String? response = await Networkutility.fetchUrl(uri);
+    if(response != null)
+      {
+        print(response);
+
+      }
   }
 
   Widget build(BuildContext context) {
@@ -2702,7 +2774,10 @@ class _AddProductState extends State<AddProduct> {
             background_container(context),
             Positioned(
               top: 120,
-              child: main_container(),
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: SingleChildScrollView(child: main_container()),
             ),
           ],
         ),
@@ -2715,9 +2790,10 @@ class _AddProductState extends State<AddProduct> {
         borderRadius: BorderRadius.circular(20),
         color: Colors.white,
       ),
-      height: 650,
+      height: 1000,
       width: 340,
       child: Column(
+
         children: [
           SizedBox(height: 30),
           Name(),// for name
@@ -2730,6 +2806,14 @@ class _AddProductState extends State<AddProduct> {
           //finalloc(),
           SizedBox(height: 30),
           date_time(),
+          SizedBox(height: 30),
+          start_date(),
+          SizedBox(height: 30),
+          startBidingTime(),
+          SizedBox(height: 30),
+          end_date(),
+          SizedBox(height: 30),
+          endBidingTime(),
           SizedBox(height: 30),
           TakeMobileNo(),// Take mobile No input
           Spacer(),
@@ -2749,7 +2833,11 @@ class _AddProductState extends State<AddProduct> {
           product: selctedItem!,
           Quantity: controllerQuantity.text,
           mobileno: controllerMobileNo.text,
-          location:"${widget.txt}",
+          startBidingDate: startBidingDate,
+          endBidingDate: endBidingDate,
+          startTime: startTime,
+          endTime: endTime,
+          location: widget.txt,
           dealDate:date,
 
 
@@ -2757,7 +2845,6 @@ class _AddProductState extends State<AddProduct> {
 
         );
         createProduct(products);
-        Navigator.pop(context);
 
 
         //   var add = Add_data(
@@ -2839,77 +2926,137 @@ class _AddProductState extends State<AddProduct> {
           style: TextStyle(
             fontSize: 15,
             color: Colors.black,
-          ),
-        ),
+          ),   ),
       ),
     );
   }
 
 
-  Widget finalloc() {
+  Widget start_date() {
     return Container(
-        alignment: Alignment.bottomLeft,
-        decoration: BoxDecoration(
-          //controller: controllerLocation,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(width: 2, color: Color(0xffC5C5C5))),
-        width: 300,
-        // child: TextButton(
-        //   onPressed:() =>
-        //     Navigator.of(context).pushReplacement(
-        //       MaterialPageRoute(builder: (context) => LocationPage()),
-        //     ),
-        //
-        //   // onPressed: () async {
-        //   //   Text? newDate = (await MaterialPageRoute(builder: (context) => LocationPage())) as Text?;
-        //   //   if (newDate == Null) return;
-        //   //   // setState(() {
-        //   //   //   Text = newDate! as DateTime;
-        //   //   // });
-        //   //},
-        //   child: Text(
-        //     //'Approximate deal date :  ${date.day}/${date.month}/${date.year}',
-        //     '${widget.txt}',
-        //     style: TextStyle(
-        //       fontSize: 15,
-        //       color: Colors.black,
-        //     ),
-        //
-        //   ),
-        //   // suffixIcon:IconButton(
-        //   //     icon: SvgPicture.asset(
-        //   //       "assets/icons/Discover.svg",
-        //   //
-        //   //     ),
-        //   //
-        //   //     onPressed:() {
-        //   //       Navigator.of(context).pushReplacement(
-        //   //         MaterialPageRoute(builder: (context) => LocationPage()),
-        //   //       );
-        //   //     }
-        //   // ),
-        // ),
-        child:TextButton.icon(
-          icon: SvgPicture.asset(
-            "assets/icons/Discover.svg",
+      alignment: Alignment.bottomLeft,
+      decoration: BoxDecoration(
 
-          ),
-          label:Text( "${widget.txt}"?? "press icon for location",
-            style: TextStyle(
-              //fontSize: 13,
-              color: Colors.black,
-            ),
-          ),
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(width: 2, color: Color(0xffC5C5C5))),
+      width: 300,
+      child: TextButton(
+        onPressed: () async {
+          DateTime? newDate = await showDatePicker(
 
-
-
-          onPressed:() =>
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => LocationPage()),
-              ),
-        )
+              context: context,
+              initialDate: startBidingDate,
+              firstDate: DateTime(2020),
+              lastDate: DateTime(2100));
+          if (newDate == Null) return;
+          setState(() {
+            startBidingDate = newDate!;
+          });
+        },
+        child: Text(
+          'Start Biding date :  ${startBidingDate.day}/${startBidingDate.month}/${startBidingDate.year}',
+          style: TextStyle(
+            fontSize: 15,
+            color: Colors.black,
+          ),   ),
+      ),
     );
   }
+
+  Widget end_date() {
+    return Container(
+      alignment: Alignment.bottomLeft,
+      decoration: BoxDecoration(
+
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(width: 2, color: Color(0xffC5C5C5))),
+      width: 300,
+      child: TextButton(
+        onPressed: () async {
+          DateTime? newDate = await showDatePicker(
+
+              context: context,
+              initialDate: endBidingDate,
+              firstDate: DateTime(2020),
+              lastDate: DateTime(2100));
+          if (newDate == Null) return;
+          setState(() {
+            endBidingDate = newDate!;
+          });
+        },
+        child: Text(
+          'End Biding date :  ${endBidingDate.day}/${endBidingDate.month}/${endBidingDate.year}',
+          style: TextStyle(
+            fontSize: 15,
+            color: Colors.black,
+          ),   ),
+      ),
+    );
+  }
+
+  Widget startBidingTime() {
+    return Container(
+      alignment: Alignment.bottomLeft,
+      decoration: BoxDecoration(
+
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(width: 2, color: Color(0xffC5C5C5))),
+      width: 300,
+      child: TextButton(
+        onPressed: () async{
+          TimeOfDay? newTime = await showTimePicker(
+               context: context,
+              initialTime: startTime,
+          );
+          if(newTime != null){
+            setState(() {
+              startTime=newTime;
+            });
+          }
+        },
+        child: Text(
+          'Starting Biding Time :  ${startTime.hour} : ${startTime.minute}',
+          style: TextStyle(
+            fontSize: 15,
+            color: Colors.black,
+          ),   ),
+      ),
+    );
+  }
+
+
+  Widget endBidingTime() {
+    return Container(
+      alignment: Alignment.bottomLeft,
+      decoration: BoxDecoration(
+
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(width: 2, color: Color(0xffC5C5C5))),
+      width: 300,
+      child: TextButton(
+        onPressed: () async{
+         TimeOfDay? newtime = await showTimePicker(
+             context: context,
+             initialTime: endTime
+         );
+         if(newtime != null)
+           {
+             endTime=newtime;
+           }
+        },
+        child: Text(
+          'Ending Biding Time :  ${endTime.hour} : ${endTime.minute}',
+          style: TextStyle(
+            fontSize: 15,
+            color: Colors.black,
+          ),   ),
+      ),
+    );
+  }
+
+
+
+
 
   Padding How() {
     return Padding(
@@ -3044,12 +3191,14 @@ class _AddProductState extends State<AddProduct> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: TextField(
-        keyboardType: TextInputType.none,
+
         //focusNode: ex,
         //autofocus: false,
         //initialValue: 'your initial text',
-        controller: expalin_C,// here for storing the name of farmer modify code later
-        showCursor: false,
+        controller: controllerLocation,// here for storing the name of farmer modify code later
+        showCursor: true,
+        keyboardType:TextInputType.streetAddress,
+
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           //labelText: "${widget.txt}",
@@ -3092,7 +3241,11 @@ class _AddProductState extends State<AddProduct> {
               }
           ),
         ),
-
+        onTap:() {
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => Locationautofill())
+          );
+        }
       ),
     );
   }
@@ -3281,7 +3434,12 @@ class _AddProductState extends State<AddProduct> {
     final docUser=FirebaseFirestore.instance.collection('products').doc();
     //user.id=docUser.id;
     final json=user.toJson();
-    await docUser.set(json);
+    await docUser.set(json).then((value) =>
+        Fluttertoast.showToast(msg: "Product added succesfully").then((value) =>
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeScreen()))
+        ),
+
+    );
 
   }
 }
@@ -3292,8 +3450,13 @@ class Products{
   final String product;
   final String Quantity;///
   final String mobileno;
-  var location;
+  final String location;
   final DateTime dealDate;
+  final DateTime startBidingDate;
+  final DateTime endBidingDate;
+  final TimeOfDay startTime;
+  final TimeOfDay endTime;
+
   Products({
     required this.name,
     required this.product,
@@ -3301,6 +3464,10 @@ class Products{
     required this.mobileno,
     required this.location,
     required this.dealDate,
+    required this.startBidingDate,
+    required this.endBidingDate,
+    required this.startTime,
+    required this.endTime
 
   });
 
@@ -3313,6 +3480,10 @@ class Products{
         'Quantity in KG':Quantity,
         'Mobileno':mobileno,
         'Location':location,
-        'Deal_Date':dealDate
+        'Deal_Date':dealDate.toString(),
+        'Start_Biding_Date':startBidingDate.toString(),
+        'End_Biding_Date':endBidingDate.toString(),
+        'Start_time':startTime.toString(),
+        'End_time':endTime.toString()
       };
 }

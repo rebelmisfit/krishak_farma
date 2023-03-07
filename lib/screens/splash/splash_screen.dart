@@ -46,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
     else
     {
       Navigator.pushReplacement(context, MaterialPageRoute(builder:(context)=> SignInScreen()));
-      //Navigator.pushReplacement(context, MaterialPageRoute(builder:(context)=> MobileLogin()));
+
 
     }
 
