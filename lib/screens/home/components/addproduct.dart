@@ -2625,6 +2625,7 @@ import 'package:krishak_farma/screens/home/components/addressselection/Loacation
 import 'package:krishak_farma/screens/home/components/addressselection/network_utility.dart';
 import 'package:krishak_farma/screens/home/home_screen.dart';
 import 'package:uuid/uuid.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../components/custom_surfix_icon.dart';
 import '../../../models/add_date.dart';
@@ -2790,7 +2791,7 @@ class _AddProductState extends State<AddProduct> {
         borderRadius: BorderRadius.circular(20),
         color: Colors.white,
       ),
-      height: 1000,
+      height: 1500,
       width: 340,
       child: Column(
 
@@ -2815,8 +2816,16 @@ class _AddProductState extends State<AddProduct> {
           SizedBox(height: 30),
           endBidingTime(),
           SizedBox(height: 30),
-          TakeMobileNo(),// Take mobile No input
-          Spacer(),
+          TakeMobileNo(),
+          SizedBox(height: 30),
+          Image1(),
+          SizedBox(height: 30),
+          Image2(),
+          SizedBox(height: 30),
+          Image3(),
+          SizedBox(height: 30),
+          Image4(),// Take mobile No input
+          SizedBox(height: 30),
           save(),
           SizedBox(height: 25),
 
@@ -2864,6 +2873,128 @@ class _AddProductState extends State<AddProduct> {
         height: 50,
         child: Text(
           'Save',
+
+          style: TextStyle(
+            fontFamily: 'f',
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+            fontSize: 17,
+          ),
+        ),
+      ),
+    );
+  }
+
+
+
+
+  GestureDetector Image1() {
+    return GestureDetector(
+      onTap: () {
+        ImagePicker(
+
+        )
+
+
+      },
+      child: Container(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          color: Colors.deepOrangeAccent,
+        ),
+        width: 120,
+        height: 50,
+        child: Text(
+          'Pick image 1',
+
+          style: TextStyle(
+            fontFamily: 'f',
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+            fontSize: 17,
+          ),
+        ),
+      ),
+    );
+  }
+
+
+  GestureDetector Image2() {
+    return GestureDetector(
+      onTap: () {
+
+
+
+      },
+      child: Container(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          color: Colors.deepOrangeAccent,
+        ),
+        width: 120,
+        height: 50,
+        child: Text(
+          'Pick image 2',
+
+          style: TextStyle(
+            fontFamily: 'f',
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+            fontSize: 17,
+          ),
+        ),
+      ),
+    );
+  }
+
+  GestureDetector Image3() {
+    return GestureDetector(
+      onTap: () {
+
+
+
+      },
+      child: Container(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          color: Colors.deepOrangeAccent,
+        ),
+        width: 120,
+        height: 50,
+        child: Text(
+          'Pick image 3',
+
+          style: TextStyle(
+            fontFamily: 'f',
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+            fontSize: 17,
+          ),
+        ),
+      ),
+    );
+  }
+
+  GestureDetector Image4() {
+    return GestureDetector(
+      onTap: () {
+
+
+
+      },
+      child: Container(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          color: Colors.deepOrangeAccent,
+        ),
+        width: 120,
+        height: 50,
+        child: Text(
+          'Pick image 4',
 
           style: TextStyle(
             fontFamily: 'f',
@@ -3303,7 +3434,7 @@ class _AddProductState extends State<AddProduct> {
 
     _item.sort();
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
 
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 15),
