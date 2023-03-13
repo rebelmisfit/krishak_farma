@@ -2620,6 +2620,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:krishak_farma/screens/home/components/LocationPage.dart';
 import 'package:krishak_farma/screens/home/components/addressselection/Loacationautofill.dart';
 import 'package:krishak_farma/screens/home/components/addressselection/network_utility.dart';
@@ -2920,8 +2921,8 @@ class _AddProductState extends State<AddProduct> {
           mobileno: controllerMobileNo.text,
           startBidingDate: startBidingDate,
           endBidingDate: endBidingDate,
-          startTime: startTime,
-          endTime: endTime,
+          startTime: startTime.format(context),
+          endTime: endTime.format(context),
           location: widget.txt,
           dealDate: date,
         );
@@ -3222,8 +3223,15 @@ class _AddProductState extends State<AddProduct> {
     );
   }
 
+  TimeOfDay stringToTimeOfDay(String tod) {
+    final format = DateFormat.jm(); //"6:00 AM"
+
+    return TimeOfDay.fromDateTime(format.parse(tod));
+  }
+
   Widget startBidingTime() {
     return Container(
+      
       alignment: Alignment.bottomLeft,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10), border: Border.all(width: 2, color: Color(0xffC5C5C5))),
@@ -3232,16 +3240,17 @@ class _AddProductState extends State<AddProduct> {
         onPressed: () async {
           TimeOfDay? newTime = await showTimePicker(
             context: context,
-            initialTime: startTime,
+            initialTime: stringToTimeOfDay(startTime.format(context)),
+            
           );
           if (newTime != null) {
             setState(() {
-              startTime = newTime;
+              startTime = stringToTimeOfDay(newTime.format(context));
             });
           }
         },
         child: Text(
-          'Starting Biding Time :  ${startTime.hour} : ${startTime.minute}',
+          'Starting Biding Time :  ${startTime.format(context)}',
           style: TextStyle(
             fontSize: 15,
             color: Colors.black,
@@ -3259,13 +3268,17 @@ class _AddProductState extends State<AddProduct> {
       width: 300,
       child: TextButton(
         onPressed: () async {
-          TimeOfDay? newtime = await showTimePicker(context: context, initialTime: endTime);
+          TimeOfDay? newtime = await showTimePicker(
+            context: context,
+            initialTime: stringToTimeOfDay(endTime.format(context)),
+          );
           if (newtime != null) {
-            endTime = newtime;
+            endTime = stringToTimeOfDay(newtime.format(context));
+            ;
           }
         },
         child: Text(
-          'Ending Biding Time :  ${endTime.hour} : ${endTime.minute}',
+          'Ending Biding Time :  ${endTime.format(context)}',
           style: TextStyle(
             fontSize: 15,
             color: Colors.black,
@@ -3401,7 +3414,7 @@ class _AddProductState extends State<AddProduct> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: TextField(
-
+        
           //focusNode: ex,
           //autofocus: false,
           //initialValue: 'your initial text',
@@ -3410,8 +3423,8 @@ class _AddProductState extends State<AddProduct> {
           keyboardType: TextInputType.streetAddress,
           decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-            //labelText: "${widget.txt}",
-
+            // labelText: "${widget.txt}",
+            hintStyle: TextStyle(color: Colors.grey),
             hintText: "select location press icon ",
             labelText: "${widget.txt}",
             // hintText: "${widget.txt}",
@@ -3502,7 +3515,7 @@ class _AddProductState extends State<AddProduct> {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 15),
-        width: 300,
+        width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
@@ -3529,10 +3542,10 @@ class _AddProductState extends State<AddProduct> {
                             //child: Image.asset('images/${e}.png'),
                             child: Image.asset('assets/images/${e}_Small.png'),
                           ),
-                          SizedBox(width: 10),
+                          const SizedBox(width: 10),
                           Text(
                             e,
-                            style: TextStyle(fontSize: 18),
+                            style: const TextStyle(fontSize: 18),
                           )
                         ],
                       ),
@@ -3637,8 +3650,8 @@ class Products {
   final DateTime dealDate;
   final DateTime startBidingDate;
   final DateTime endBidingDate;
-  final TimeOfDay startTime;
-  final TimeOfDay endTime;
+  final String startTime;
+  final String endTime;
 
   Products(
       {required this.name,
