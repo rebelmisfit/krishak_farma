@@ -77,7 +77,8 @@ dependencies:
   google_maps_flutter: ^2.2.5
   flutter_google_places: ^0.3.0
   http: ^0.13.5
-  image_picker: ^0.8.6+4
+  image_picker: ^0.8.7
+  dotted_border: ^2.0.0+3
 
 
 

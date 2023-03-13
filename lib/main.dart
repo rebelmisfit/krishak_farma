@@ -72,7 +72,6 @@ class MyApp extends StatelessWidget
 
     return  OverlaySupport(
       child: MaterialApp(
-
         debugShowCheckedModeBanner: false,
         initialRoute: SplashScreen.routeName,
         // home: FutureBuilder(future: checkLoginStatus(),builder:(BuildContext context,AsyncSnapshot<bool>snapshot){

@@ -2111,9 +2111,6 @@
 //   }
 // }
 
-
-
-
 // import 'package:flutter/cupertino.dart';
 // import 'package:flutter/material.dart';
 // import 'package:hive_flutter/hive_flutter.dart';
@@ -2612,9 +2609,12 @@
 //   }
 // }
 
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dialog_flowtter/dialog_flowtter.dart';
+import 'package:dotted_border/dotted_border.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -2632,43 +2632,29 @@ import '../../../models/add_date.dart';
 
 import 'package:uuid/uuid.dart';
 
-
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-
-
 class AddProduct extends StatefulWidget {
-  var txt="select location Press icon";
+  var txt = "select location Press icon";
   static String routeName = "/addproduct";
 
-  AddProduct( {Key? key,required this.txt}) : super(key: key);
+  AddProduct({Key? key, required this.txt}) : super(key: key);
 
   @override
   _AddProductState createState() => _AddProductState();
 }
 
 class _AddProductState extends State<AddProduct> {
-
-  final controllerName=TextEditingController();
-  final controllerProduct=TextEditingController();
-  final controllerQuantity=TextEditingController();
-  final controllerMobileNo=TextEditingController();
-  final controllerLocation=TextEditingController();
-  final controllerDealDate=TextEditingController();
-   DateTime startBidingDate= new DateTime.now();
-   DateTime endBidingDate = new DateTime.now();
+  final controllerName = TextEditingController();
+  final controllerProduct = TextEditingController();
+  final controllerQuantity = TextEditingController();
+  final controllerMobileNo = TextEditingController();
+  final controllerLocation = TextEditingController();
+  final controllerDealDate = TextEditingController();
+  DateTime startBidingDate = new DateTime.now();
+  DateTime endBidingDate = new DateTime.now();
   TimeOfDay startTime = new TimeOfDay.now();
   TimeOfDay endTime = new TimeOfDay.now();
-
-
-
-
-
-
-
-
-
-
 
   final box = Hive.box<Add_data>('data');
   DateTime date = new DateTime.now();
@@ -2680,24 +2666,107 @@ class _AddProductState extends State<AddProduct> {
   final TextEditingController amount_c = TextEditingController();
   FocusNode amount_ = FocusNode();
   final List<String> _item = [
-    "Apple", "Banana", "Grapes", "Orange", "Cotton", "Brinjal", "Wheat", "Corn", "Lady_Finger","Gram", "Peanut", "Soyabin",
-    "Cabbage", "Marigold", "Mogara", "Onion", "Garlic", "Carrot", "Tomato", "Raddish","Sapodila","Sugarcan","Patato","Ginger",
-    "Mustard", "Coriander", "Caulflower", "Shepu", "Fenugreek", "Ambadi", "BitterGaurd", "DrumStick", "Chawali",
-    "Masoor", "Moong", "Mataki", "Pea", "Ailanthus", "Allspice", "Almond", "Alovera", "Antherium","Arecanut",
-    "AshGourd", "Ashwagandha", "Beans", "Beatroot", "BengalGram", "Ber", "Betelvine", "Bajra", "Brocali", "BlackGram",
-    "BottleGourd",  "Capsicum", "Mango", "Cardamom", "CashewNut", "Champak", "Chive", "Cinnamon",
-    "CitronellaGrass", "Colve", "Cocoa", "Coconut", "Coffee", "Coleus", "Cowpea", "Cucumber", "Cumin",
-    "CurryLeaves", "Rose", "Daylily", "Dill", "DragonFruit", "Fig", "FoxTailMillet", "FrenchBean",
-    "Guava", "Jackfruit", "Jasmine", "Lemon", "Mint", "PearlMillet", "Pomegranate","Pumpkin", "Rice", "Rubber",
-    "Sunflower", "Strawbery", "Tamarind","Tea", "Termeric", "Watermelon", "Vanila", "Walnut"
-
-
+    "Apple",
+    "Banana",
+    "Grapes",
+    "Orange",
+    "Cotton",
+    "Brinjal",
+    "Wheat",
+    "Corn",
+    "Lady_Finger",
+    "Gram",
+    "Peanut",
+    "Soyabin",
+    "Cabbage",
+    "Marigold",
+    "Mogara",
+    "Onion",
+    "Garlic",
+    "Carrot",
+    "Tomato",
+    "Raddish",
+    "Sapodila",
+    "Sugarcan",
+    "Patato",
+    "Ginger",
+    "Mustard",
+    "Coriander",
+    "Caulflower",
+    "Shepu",
+    "Fenugreek",
+    "Ambadi",
+    "BitterGaurd",
+    "DrumStick",
+    "Chawali",
+    "Masoor",
+    "Moong",
+    "Mataki",
+    "Pea",
+    "Ailanthus",
+    "Allspice",
+    "Almond",
+    "Alovera",
+    "Antherium",
+    "Arecanut",
+    "AshGourd",
+    "Ashwagandha",
+    "Beans",
+    "Beatroot",
+    "BengalGram",
+    "Ber",
+    "Betelvine",
+    "Bajra",
+    "Brocali",
+    "BlackGram",
+    "BottleGourd",
+    "Capsicum",
+    "Mango",
+    "Cardamom",
+    "CashewNut",
+    "Champak",
+    "Chive",
+    "Cinnamon",
+    "CitronellaGrass",
+    "Colve",
+    "Cocoa",
+    "Coconut",
+    "Coffee",
+    "Coleus",
+    "Cowpea",
+    "Cucumber",
+    "Cumin",
+    "CurryLeaves",
+    "Rose",
+    "Daylily",
+    "Dill",
+    "DragonFruit",
+    "Fig",
+    "FoxTailMillet",
+    "FrenchBean",
+    "Guava",
+    "Jackfruit",
+    "Jasmine",
+    "Lemon",
+    "Mint",
+    "PearlMillet",
+    "Pomegranate",
+    "Pumpkin",
+    "Rice",
+    "Rubber",
+    "Sunflower",
+    "Strawbery",
+    "Tamarind",
+    "Tea",
+    "Termeric",
+    "Watermelon",
+    "Vanila",
+    "Walnut"
   ];
   // List<PlacesSearchResult> searchResults = [];
   // late PlacesAutocompleteResponse autocompleteResponse;
   // late GoogleMapController mapController;
-  String apiKey="AIzaSyA0YP0uj7CM8wISZLQ3z-BluBG-f30PnBo";
-
+  String apiKey = "AIzaSyA0YP0uj7CM8wISZLQ3z-BluBG-f30PnBo";
 
   final List<String> _itemei = [
     'Income',
@@ -2723,7 +2792,6 @@ class _AddProductState extends State<AddProduct> {
 
       // getAutocomplete();
     });
-
   }
 
   void onMapCreated(GoogleMapController controller) {
@@ -2746,29 +2814,22 @@ class _AddProductState extends State<AddProduct> {
   //   }
   // }
 
-  Future<void> placeAutocomplete(String query)
-  async {
-    Uri uri = Uri.http("maps.googleapis.com",
-        "maps/api/place/autocomplete/json",
-    {
-      "input":query,
-      "key":apiKey,
-
+  Future<void> placeAutocomplete(String query) async {
+    Uri uri = Uri.http("maps.googleapis.com", "maps/api/place/autocomplete/json", {
+      "input": query,
+      "key": apiKey,
     });
 
     String? response = await Networkutility.fetchUrl(uri);
-    if(response != null)
-      {
-        print(response);
-
-      }
+    if (response != null) {
+      print(response);
+    }
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
-
-      body:SafeArea(
+      body: SafeArea(
         child: Stack(
           alignment: AlignmentDirectional.center,
           children: [
@@ -2785,6 +2846,7 @@ class _AddProductState extends State<AddProduct> {
       ),
     );
   }
+
   Container main_container() {
     return Container(
       decoration: BoxDecoration(
@@ -2794,16 +2856,29 @@ class _AddProductState extends State<AddProduct> {
       height: 1500,
       width: 340,
       child: Column(
-
         children: [
+          SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                imagePick(0),
+                SizedBox(width: 10),
+                imagePick(1),
+                SizedBox(width: 10),
+                imagePick(2),
+              ],
+            ),
+          ),
           SizedBox(height: 30),
-          Name(),// for name
+          Name(), // for name
           SizedBox(height: 30),
-          Product(),// for select the product
+          Product(), // for select the product
           SizedBox(height: 30),
-          Quantity(),// for quantity of product
+          Quantity(), // for quantity of product
           SizedBox(height: 30),
-          Location(),// for location of farmer
+          Location(), // for location of farmer
           //finalloc(),
           SizedBox(height: 30),
           date_time(),
@@ -2824,11 +2899,10 @@ class _AddProductState extends State<AddProduct> {
           SizedBox(height: 30),
           Image3(),
           SizedBox(height: 30),
-          Image4(),// Take mobile No input
+          Image4(), // Take mobile No input
           SizedBox(height: 30),
           save(),
           SizedBox(height: 25),
-
         ],
       ),
     );
@@ -2837,24 +2911,20 @@ class _AddProductState extends State<AddProduct> {
   GestureDetector save() {
     return GestureDetector(
       onTap: () {
-        final products=Products(
-          name:controllerName.text,
+        final products = Products(
+          name: controllerName.text,
           product: selctedItem!,
           Quantity: controllerQuantity.text,
+          imageUrls: imageUrls,
           mobileno: controllerMobileNo.text,
           startBidingDate: startBidingDate,
           endBidingDate: endBidingDate,
           startTime: startTime,
           endTime: endTime,
           location: widget.txt,
-          dealDate:date,
-
-
-
-
+          dealDate: date,
         );
         createProduct(products);
-
 
         //   var add = Add_data(
         //       selctedItemi!, amount_c.text, date, expalin_C.text, selctedItem!);
@@ -2873,7 +2943,6 @@ class _AddProductState extends State<AddProduct> {
         height: 50,
         child: Text(
           'Save',
-
           style: TextStyle(
             fontFamily: 'f',
             fontWeight: FontWeight.w600,
@@ -2885,17 +2954,10 @@ class _AddProductState extends State<AddProduct> {
     );
   }
 
-
-
-
   GestureDetector Image1() {
     return GestureDetector(
       onTap: () {
-        ImagePicker(
-
-        )
-
-
+        ImagePicker();
       },
       child: Container(
         alignment: Alignment.center,
@@ -2907,7 +2969,6 @@ class _AddProductState extends State<AddProduct> {
         height: 50,
         child: Text(
           'Pick image 1',
-
           style: TextStyle(
             fontFamily: 'f',
             fontWeight: FontWeight.w600,
@@ -2919,14 +2980,9 @@ class _AddProductState extends State<AddProduct> {
     );
   }
 
-
   GestureDetector Image2() {
     return GestureDetector(
-      onTap: () {
-
-
-
-      },
+      onTap: () {},
       child: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
@@ -2937,7 +2993,6 @@ class _AddProductState extends State<AddProduct> {
         height: 50,
         child: Text(
           'Pick image 2',
-
           style: TextStyle(
             fontFamily: 'f',
             fontWeight: FontWeight.w600,
@@ -2951,11 +3006,7 @@ class _AddProductState extends State<AddProduct> {
 
   GestureDetector Image3() {
     return GestureDetector(
-      onTap: () {
-
-
-
-      },
+      onTap: () {},
       child: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
@@ -2966,7 +3017,6 @@ class _AddProductState extends State<AddProduct> {
         height: 50,
         child: Text(
           'Pick image 3',
-
           style: TextStyle(
             fontFamily: 'f',
             fontWeight: FontWeight.w600,
@@ -2980,11 +3030,7 @@ class _AddProductState extends State<AddProduct> {
 
   GestureDetector Image4() {
     return GestureDetector(
-      onTap: () {
-
-
-
-      },
+      onTap: () {},
       child: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
@@ -2995,7 +3041,6 @@ class _AddProductState extends State<AddProduct> {
         height: 50,
         child: Text(
           'Pick image 4',
-
           style: TextStyle(
             fontFamily: 'f',
             fontWeight: FontWeight.w600,
@@ -3007,6 +3052,73 @@ class _AddProductState extends State<AddProduct> {
     );
   }
 
+  List<String> imageUrls = [];
+
+  void imageFromGallary() async {
+    String imageUrl = '';
+    final ImagePicker _picker = ImagePicker();
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    print(image!.path);
+    Reference referenceRoot = FirebaseStorage.instance.ref();
+    Reference referenceDirImage = referenceRoot.child('image');
+    Reference referenceImageToUpload = referenceDirImage.child('${image.name}');
+    try {
+      referenceImageToUpload.putFile(File(image.path));
+      imageUrl = await referenceImageToUpload.getDownloadURL();
+      imageUrls.add(imageUrl);
+    } catch (e) {
+      print(e);
+      print("Zala Bhau");
+    }
+    print("ewkjnfkjnff");
+    print(imageUrls);
+    print(imageUrl);
+    setState(() {});
+  }
+
+  GestureDetector imagePick(int ind) {
+    return GestureDetector(
+      onTap: imageFromGallary,
+      child: imageUrls.length < ind + 1
+          ? DottedBorder(
+              color: Colors.black,
+              borderType: BorderType.RRect,
+              radius: const Radius.circular(10),
+              dashPattern: const [10, 4],
+              strokeCap: StrokeCap.round,
+              child: Container(
+                // padding: EdgeInsets.only(left: 20),
+                height: 100,
+                width: 100,
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.folder_open,
+                      size: 20,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Select Image",
+                      style: TextStyle(fontSize: 13, color: Colors.grey.shade400),
+                    )
+                  ],
+                ),
+              ),
+            )
+          : Container(
+              height: 100,
+              width: 100,
+              child: Image.network(
+                imageUrls[ind],
+                fit: BoxFit.contain,
+              ),
+            ),
+    );
+  }
 
   // ElevatedButton save(){
   //   return ElevatedButton(
@@ -3035,18 +3147,12 @@ class _AddProductState extends State<AddProduct> {
     return Container(
       alignment: Alignment.bottomLeft,
       decoration: BoxDecoration(
-
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(width: 2, color: Color(0xffC5C5C5))),
+          borderRadius: BorderRadius.circular(10), border: Border.all(width: 2, color: Color(0xffC5C5C5))),
       width: 300,
       child: TextButton(
         onPressed: () async {
           DateTime? newDate = await showDatePicker(
-
-              context: context,
-              initialDate: date,
-              firstDate: DateTime(2020),
-              lastDate: DateTime(2100));
+              context: context, initialDate: date, firstDate: DateTime(2020), lastDate: DateTime(2100));
           if (newDate == Null) return;
           setState(() {
             date = newDate!;
@@ -3057,28 +3163,22 @@ class _AddProductState extends State<AddProduct> {
           style: TextStyle(
             fontSize: 15,
             color: Colors.black,
-          ),   ),
+          ),
+        ),
       ),
     );
   }
-
 
   Widget start_date() {
     return Container(
       alignment: Alignment.bottomLeft,
       decoration: BoxDecoration(
-
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(width: 2, color: Color(0xffC5C5C5))),
+          borderRadius: BorderRadius.circular(10), border: Border.all(width: 2, color: Color(0xffC5C5C5))),
       width: 300,
       child: TextButton(
         onPressed: () async {
           DateTime? newDate = await showDatePicker(
-
-              context: context,
-              initialDate: startBidingDate,
-              firstDate: DateTime(2020),
-              lastDate: DateTime(2100));
+              context: context, initialDate: startBidingDate, firstDate: DateTime(2020), lastDate: DateTime(2100));
           if (newDate == Null) return;
           setState(() {
             startBidingDate = newDate!;
@@ -3089,7 +3189,8 @@ class _AddProductState extends State<AddProduct> {
           style: TextStyle(
             fontSize: 15,
             color: Colors.black,
-          ),   ),
+          ),
+        ),
       ),
     );
   }
@@ -3098,18 +3199,12 @@ class _AddProductState extends State<AddProduct> {
     return Container(
       alignment: Alignment.bottomLeft,
       decoration: BoxDecoration(
-
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(width: 2, color: Color(0xffC5C5C5))),
+          borderRadius: BorderRadius.circular(10), border: Border.all(width: 2, color: Color(0xffC5C5C5))),
       width: 300,
       child: TextButton(
         onPressed: () async {
           DateTime? newDate = await showDatePicker(
-
-              context: context,
-              initialDate: endBidingDate,
-              firstDate: DateTime(2020),
-              lastDate: DateTime(2100));
+              context: context, initialDate: endBidingDate, firstDate: DateTime(2020), lastDate: DateTime(2100));
           if (newDate == Null) return;
           setState(() {
             endBidingDate = newDate!;
@@ -3120,7 +3215,8 @@ class _AddProductState extends State<AddProduct> {
           style: TextStyle(
             fontSize: 15,
             color: Colors.black,
-          ),   ),
+          ),
+        ),
       ),
     );
   }
@@ -3129,19 +3225,17 @@ class _AddProductState extends State<AddProduct> {
     return Container(
       alignment: Alignment.bottomLeft,
       decoration: BoxDecoration(
-
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(width: 2, color: Color(0xffC5C5C5))),
+          borderRadius: BorderRadius.circular(10), border: Border.all(width: 2, color: Color(0xffC5C5C5))),
       width: 300,
       child: TextButton(
-        onPressed: () async{
+        onPressed: () async {
           TimeOfDay? newTime = await showTimePicker(
-               context: context,
-              initialTime: startTime,
+            context: context,
+            initialTime: startTime,
           );
-          if(newTime != null){
+          if (newTime != null) {
             setState(() {
-              startTime=newTime;
+              startTime = newTime;
             });
           }
         },
@@ -3150,44 +3244,35 @@ class _AddProductState extends State<AddProduct> {
           style: TextStyle(
             fontSize: 15,
             color: Colors.black,
-          ),   ),
+          ),
+        ),
       ),
     );
   }
-
 
   Widget endBidingTime() {
     return Container(
       alignment: Alignment.bottomLeft,
       decoration: BoxDecoration(
-
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(width: 2, color: Color(0xffC5C5C5))),
+          borderRadius: BorderRadius.circular(10), border: Border.all(width: 2, color: Color(0xffC5C5C5))),
       width: 300,
       child: TextButton(
-        onPressed: () async{
-         TimeOfDay? newtime = await showTimePicker(
-             context: context,
-             initialTime: endTime
-         );
-         if(newtime != null)
-           {
-             endTime=newtime;
-           }
+        onPressed: () async {
+          TimeOfDay? newtime = await showTimePicker(context: context, initialTime: endTime);
+          if (newtime != null) {
+            endTime = newtime;
+          }
         },
         child: Text(
           'Ending Biding Time :  ${endTime.hour} : ${endTime.minute}',
           style: TextStyle(
             fontSize: 15,
             color: Colors.black,
-          ),   ),
+          ),
+        ),
       ),
     );
   }
-
-
-
-
 
   Padding How() {
     return Padding(
@@ -3211,24 +3296,24 @@ class _AddProductState extends State<AddProduct> {
           }),
           items: _itemei
               .map((e) => DropdownMenuItem(
-            child: Container(
-              alignment: Alignment.center,
-              child: Row(
-                children: [
-                  Text(
-                    e,
-                    style: TextStyle(fontSize: 18),
-                  )
-                ],
-              ),
-            ),
-            value: e,
-          ))
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Row(
+                        children: [
+                          Text(
+                            e,
+                            style: TextStyle(fontSize: 18),
+                          )
+                        ],
+                      ),
+                    ),
+                    value: e,
+                  ))
               .toList(),
           selectedItemBuilder: (BuildContext context) => _itemei
               .map((e) => Row(
-            children: [Text(e)],
-          ))
+                    children: [Text(e)],
+                  ))
               .toList(),
           hint: Padding(
             padding: const EdgeInsets.only(top: 12),
@@ -3257,8 +3342,7 @@ class _AddProductState extends State<AddProduct> {
           labelText: 'amount',
           labelStyle: TextStyle(fontSize: 17, color: Colors.grey.shade500),
           enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(width: 2, color: Color(0xffC5C5C5))),
+              borderRadius: BorderRadius.circular(10), borderSide: BorderSide(width: 2, color: Color(0xffC5C5C5))),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(width: 2, color: Colors.deepOrangeAccent)),
@@ -3278,8 +3362,7 @@ class _AddProductState extends State<AddProduct> {
           labelText: 'explain',
           labelStyle: TextStyle(fontSize: 17, color: Colors.grey.shade500),
           enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(width: 2, color: Color(0xffC5C5C5))),
+              borderRadius: BorderRadius.circular(10), borderSide: BorderSide(width: 2, color: Color(0xffC5C5C5))),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(width: 2, color: Colors.deepOrangeAccent)),
@@ -3297,14 +3380,11 @@ class _AddProductState extends State<AddProduct> {
         //controller: expalin_C,// here for storing the name of farmer modify code later
         controller: controllerName,
         decoration: InputDecoration(
-
           contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           labelText: 'Enter name',
-
           labelStyle: TextStyle(fontSize: 17, color: Colors.grey.shade500),
           enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(width: 2, color: Color(0xffC5C5C5))),
+              borderRadius: BorderRadius.circular(10), borderSide: BorderSide(width: 2, color: Color(0xffC5C5C5))),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(width: 2, color: Colors.deepOrangeAccent)),
@@ -3314,8 +3394,6 @@ class _AddProductState extends State<AddProduct> {
     );
   }
 
-
-
   // for location
 
   Padding Location() {
@@ -3323,61 +3401,49 @@ class _AddProductState extends State<AddProduct> {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: TextField(
 
-        //focusNode: ex,
-        //autofocus: false,
-        //initialValue: 'your initial text',
-        controller: controllerLocation,// here for storing the name of farmer modify code later
-        showCursor: true,
-        keyboardType:TextInputType.streetAddress,
+          //focusNode: ex,
+          //autofocus: false,
+          //initialValue: 'your initial text',
+          controller: controllerLocation, // here for storing the name of farmer modify code later
+          showCursor: true,
+          keyboardType: TextInputType.streetAddress,
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+            //labelText: "${widget.txt}",
 
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-          //labelText: "${widget.txt}",
-
-          hintText: "select location press icon ",
-          labelText: "${widget.txt}",
-          // hintText: "${widget.txt}",
-          // labelText: "select location press icon at right side",
-          labelStyle: TextStyle(fontSize: 15, color: Colors.black),
-          enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(width: 2, color: Color(0xffC5C5C5))),
-          focusedBorder: OutlineInputBorder(
-
-              borderRadius: BorderRadius.circular(10),
-
-              borderSide: BorderSide(width: 2, color: Colors.deepOrangeAccent)),
-          // suffixIcon: IconButton(
-          //
-          //   // onPressed:() {
-          //   //   Navigator.of(context).pushReplacement(
-          //   //     MaterialPageRoute(builder: (context) =>LocationPage())
-          //   //   );
-          //   },
-          //   icon: CustomSurffixIcon(svgIcon: "assets/icons/Discover.svg"),
-          // )
-          //suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Discover.svg",),
-          suffixIcon:IconButton(
-              icon: SvgPicture.asset(
-                "assets/icons/Discover.svg",
-
-              ),
-
-              onPressed:() {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => LocationPage()),
-
-
-                );
-              }
+            hintText: "select location press icon ",
+            labelText: "${widget.txt}",
+            // hintText: "${widget.txt}",
+            // labelText: "select location press icon at right side",
+            labelStyle: TextStyle(fontSize: 15, color: Colors.black),
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10), borderSide: BorderSide(width: 2, color: Color(0xffC5C5C5))),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(width: 2, color: Colors.deepOrangeAccent)),
+            // suffixIcon: IconButton(
+            //
+            //   // onPressed:() {
+            //   //   Navigator.of(context).pushReplacement(
+            //   //     MaterialPageRoute(builder: (context) =>LocationPage())
+            //   //   );
+            //   },
+            //   icon: CustomSurffixIcon(svgIcon: "assets/icons/Discover.svg"),
+            // )
+            //suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Discover.svg",),
+            suffixIcon: IconButton(
+                icon: SvgPicture.asset(
+                  "assets/icons/Discover.svg",
+                ),
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => LocationPage()),
+                  );
+                }),
           ),
-        ),
-        onTap:() {
-          Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => Locationautofill())
-          );
-        }
-      ),
+          onTap: () {
+            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Locationautofill()));
+          }),
     );
   }
 
@@ -3388,7 +3454,7 @@ class _AddProductState extends State<AddProduct> {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: TextField(
         controller: controllerQuantity,
-        keyboardType:TextInputType.number,
+        keyboardType: TextInputType.number,
         //focusNode: ex,
         //controller: expalin_C,// here for storing the name of farmer modify code later
         decoration: InputDecoration(
@@ -3396,8 +3462,7 @@ class _AddProductState extends State<AddProduct> {
           labelText: 'Enter quantity of product in Kg',
           labelStyle: TextStyle(fontSize: 17, color: Colors.grey.shade500),
           enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(width: 2, color: Color(0xffC5C5C5))),
+              borderRadius: BorderRadius.circular(10), borderSide: BorderSide(width: 2, color: Color(0xffC5C5C5))),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(width: 2, color: Colors.deepOrangeAccent)),
@@ -3407,12 +3472,12 @@ class _AddProductState extends State<AddProduct> {
     );
   }
 
-  Padding TakeMobileNo(){
+  Padding TakeMobileNo() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: TextField(
         controller: controllerMobileNo,
-        keyboardType:TextInputType.number,
+        keyboardType: TextInputType.number,
         //focusNode: ex,
         //controller: expalin_C,// here for storing the name of farmer modify code later
         decoration: InputDecoration(
@@ -3420,8 +3485,7 @@ class _AddProductState extends State<AddProduct> {
           labelText: 'Enter Mobile No',
           labelStyle: TextStyle(fontSize: 17, color: Colors.grey.shade500),
           enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(width: 2, color: Color(0xffC5C5C5))),
+              borderRadius: BorderRadius.circular(10), borderSide: BorderSide(width: 2, color: Color(0xffC5C5C5))),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(width: 2, color: Colors.deepOrangeAccent)),
@@ -3430,12 +3494,11 @@ class _AddProductState extends State<AddProduct> {
       ),
     );
   }
-  Padding Product() {
 
+  Padding Product() {
     _item.sort();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
-
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 15),
         width: 300,
@@ -3448,56 +3511,49 @@ class _AddProductState extends State<AddProduct> {
         ),
         child: DropdownButton<String>(
           value: selctedItem,
-
           onChanged: ((value) {
-
             setState(() {
-
               selctedItem = value!;
-
             });
           }),
           items: _item
               .map((e) => DropdownMenuItem(
-            child: Container(
-              alignment: Alignment.center,
-              child: Row(
-                children: [
-                  Container(
-                    width: 40,
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 40,
 
-                    //child: Image.asset('images/${e}.png'),
-                    child: Image.asset('assets/images/${e}_Small.png'),
-                  ),
-                  SizedBox(width: 10),
-                  Text(
-
-                    e,
-                    style: TextStyle(fontSize: 18),
-                  )
-                ],
-              ),
-            ),
-            value: e,
-          ))
+                            //child: Image.asset('images/${e}.png'),
+                            child: Image.asset('assets/images/${e}_Small.png'),
+                          ),
+                          SizedBox(width: 10),
+                          Text(
+                            e,
+                            style: TextStyle(fontSize: 18),
+                          )
+                        ],
+                      ),
+                    ),
+                    value: e,
+                  ))
               .toList(),
           selectedItemBuilder: (BuildContext context) => _item
               .map((e) => Row(
-            children: [
-              Container(
-                width: 42,
-                //child: Image.asset('images/${e}.png'),
-                child: Image.asset('assets/images/${e}_Small.png'),
-              ),
-              SizedBox(width: 5),
-              Text(e)
-            ],
-          ))
+                    children: [
+                      Container(
+                        width: 42,
+                        //child: Image.asset('images/${e}.png'),
+                        child: Image.asset('assets/images/${e}_Small.png'),
+                      ),
+                      SizedBox(width: 5),
+                      Text(e)
+                    ],
+                  ))
               .toList(),
-
           hint: Padding(
             padding: const EdgeInsets.only(top: 12),
-
             child: Text(
               'Select Product',
               style: TextStyle(color: Colors.grey),
@@ -3541,10 +3597,7 @@ class _AddProductState extends State<AddProduct> {
                     ),
                     Text(
                       'Add Product',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white),
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
                     ),
                     Icon(
                       Icons.attach_file_outlined,
@@ -3558,28 +3611,26 @@ class _AddProductState extends State<AddProduct> {
         ),
       ],
     );
-
-
   }
-  Future createProduct(Products user) async{
-    final docUser=FirebaseFirestore.instance.collection('products').doc();
+
+  Future createProduct(Products user) async {
+    final docUser = FirebaseFirestore.instance.collection('products').doc();
     //user.id=docUser.id;
-    final json=user.toJson();
-    await docUser.set(json).then((value) =>
-        Fluttertoast.showToast(msg: "Product added succesfully").then((value) =>
-            Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeScreen()))
-        ),
-
-    );
-
+    final json = user.toJson();
+    await docUser.set(json).then(
+          (value) => Fluttertoast.showToast(msg: "Product added succesfully")
+              .then((value) => Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()))),
+        );
   }
 }
 
-
-class Products{
+class Products {
   final String name;
   final String product;
-  final String Quantity;///
+  final String Quantity;
+  final List<String> imageUrls;
+
+  ///
   final String mobileno;
   final String location;
   final DateTime dealDate;
@@ -3588,33 +3639,30 @@ class Products{
   final TimeOfDay startTime;
   final TimeOfDay endTime;
 
-  Products({
-    required this.name,
-    required this.product,
-    required this.Quantity,
-    required this.mobileno,
-    required this.location,
-    required this.dealDate,
-    required this.startBidingDate,
-    required this.endBidingDate,
-    required this.startTime,
-    required this.endTime
+  Products(
+      {required this.name,
+      required this.product,
+      required this.Quantity,
+      required this.mobileno,
+      required this.location,
+      required this.dealDate,
+      required this.startBidingDate,
+      required this.endBidingDate,
+      required this.startTime,
+      required this.endTime,
+      required this.imageUrls});
 
-  });
-
-
-
-  Map<String ,dynamic> toJson()=>
-      {
-        'name':name,
-        'Product':product,
-        'Quantity in KG':Quantity,
-        'Mobileno':mobileno,
-        'Location':location,
-        'Deal_Date':dealDate.toString(),
-        'Start_Biding_Date':startBidingDate.toString(),
-        'End_Biding_Date':endBidingDate.toString(),
-        'Start_time':startTime.toString(),
-        'End_time':endTime.toString()
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'Product': product,
+        'Quantity in KG': Quantity,
+        'images': imageUrls,
+        'Mobileno': mobileno,
+        'Location': location,
+        'Deal_Date': dealDate.toString(),
+        'Start_Biding_Date': startBidingDate.toString(),
+        'End_Biding_Date': endBidingDate.toString(),
+        'Start_time': startTime.toString(),
+        'End_time': endTime.toString()
       };
 }
