@@ -2872,13 +2872,14 @@ class _AddProductState extends State<AddProduct> {
             ),
           ),
           SizedBox(height: 30),
+          Location(),
+          SizedBox(height: 30),
           Name(), // for name
           SizedBox(height: 30),
           Product(), // for select the product
           SizedBox(height: 30),
           Quantity(), // for quantity of product
-          SizedBox(height: 30),
-          Location(), // for location of farmer
+          // for location of farmer
           //finalloc(),
           SizedBox(height: 30),
           date_time(),
@@ -2892,14 +2893,14 @@ class _AddProductState extends State<AddProduct> {
           endBidingTime(),
           SizedBox(height: 30),
           TakeMobileNo(),
-          SizedBox(height: 30),
-          Image1(),
-          SizedBox(height: 30),
-          Image2(),
-          SizedBox(height: 30),
-          Image3(),
-          SizedBox(height: 30),
-          Image4(), // Take mobile No input
+          // SizedBox(height: 30),
+          // Image1(),
+          // SizedBox(height: 30),
+          // Image2(),
+          // SizedBox(height: 30),
+          // Image3(),
+          // SizedBox(height: 30),
+          // Image4(), // Take mobile No input
           SizedBox(height: 30),
           save(),
           SizedBox(height: 25),
@@ -3431,15 +3432,15 @@ class _AddProductState extends State<AddProduct> {
             //   icon: CustomSurffixIcon(svgIcon: "assets/icons/Discover.svg"),
             // )
             //suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Discover.svg",),
-            suffixIcon: IconButton(
-                icon: SvgPicture.asset(
-                  "assets/icons/Discover.svg",
-                ),
-                onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => LocationPage()),
-                  );
-                }),
+            // suffixIcon: IconButton(
+            //     icon: SvgPicture.asset(
+            //       "assets/icons/Discover.svg",
+            //     ),
+            //     onPressed: () {
+            //       Navigator.of(context).pushReplacement(
+            //         MaterialPageRoute(builder: (context) => LocationPage()),
+            //       );
+            //     }),
           ),
           onTap: () {
             Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Locationautofill()));
